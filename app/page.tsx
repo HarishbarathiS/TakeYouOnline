@@ -1,10 +1,47 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { ArrowUpRight, Mail, Github, Linkedin } from "lucide-react";
 
 export default function Portfolio() {
   const date = new Date();
+  const eyesRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (eyesRef.current) {
+        const eyes = eyesRef.current.querySelectorAll(".eye");
+        eyes.forEach((eye) => {
+          const eyeRect = eye.getBoundingClientRect();
+          const eyeCenterX = eyeRect.left + eyeRect.width / 2;
+          const eyeCenterY = eyeRect.top + eyeRect.height / 2;
+
+          const angle = Math.atan2(
+            e.clientY - eyeCenterY,
+            e.clientX - eyeCenterX
+          );
+          const distance = Math.min(
+            8,
+            Math.sqrt(
+              Math.pow(e.clientX - eyeCenterX, 2) +
+                Math.pow(e.clientY - eyeCenterY, 2)
+            ) / 10
+          );
+
+          const pupilX = Math.cos(angle) * distance;
+          const pupilY = Math.sin(angle) * distance;
+
+          const pupil = eye.querySelector(".pupil") as HTMLElement;
+          if (pupil) {
+            pupil.style.transform = `translate(${pupilX}px, ${pupilY}px)`;
+          }
+        });
+      }
+    };
+
+    document.addEventListener("mousemove", handleMouseMove);
+    return () => document.removeEventListener("mousemove", handleMouseMove);
+  }, []);
 
   const projects = [
     {
@@ -202,7 +239,22 @@ export default function Portfolio() {
               <div className="relative">
                 <div className="w-full h-80 bg-gray-900 rounded-sm relative overflow-hidden border border-gray-800">
                   <div className="absolute inset-0 bg-gradient-to-br from-gray-800 to-gray-900">
-                    <div className="relative flex size-3"></div>
+                    {/* Animated Eyes */}
+                    <div
+                      ref={eyesRef}
+                      className="absolute inset-0 flex items-center justify-center"
+                    >
+                      <div className="flex space-x-8">
+                        {/* Left Eye */}
+                        <div className="eye relative w-16 h-16 bg-white rounded-full border-2 border-gray-600 flex items-center justify-center">
+                          <div className="pupil w-6 h-6 bg-black rounded-full transition-transform duration-75 ease-out"></div>
+                        </div>
+                        {/* Right Eye */}
+                        <div className="eye relative w-16 h-16 bg-white rounded-full border-2 border-gray-600 flex items-center justify-center">
+                          <div className="pupil w-6 h-6 bg-black rounded-full transition-transform duration-75 ease-out"></div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                   <div className="absolute bottom-4 right-4 text-xs text-gray-500">
                     {date.getDate()}/{date.getMonth() + 1}/{date.getFullYear()}
