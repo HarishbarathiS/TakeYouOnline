@@ -1,11 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import React from "react";
 import { ArrowUpRight, Mail, Github, Linkedin } from "lucide-react";
 
 export default function Portfolio() {
-  const [activeSection, setActiveSection] = useState<string | null>(null);
-
   const date = new Date();
 
   const projects = [
@@ -73,7 +71,7 @@ export default function Portfolio() {
       period: "June 2025 - Present",
       location: "Chennai",
       description:
-        "Building a platform to scale doctor's expertise beyond their time and presence by automating administrative tasks such as user onboarding, privilege management, personalized care plans for patients.",
+        "Building a platform to scale doctor&apos;s expertise beyond their time and presence by automating administrative tasks such as user onboarding, privilege management, personalized care plans for patients.",
       achievements: [
         "Designed the database schema for the application to handle various things like medical records, patient data and doctor appointments and made sure to be scalable for millions of users",
         "Currently working on the integration AI of solutions like Speech to Text, Speaker diarisation and a knowledge base for context to created LLM",
@@ -219,7 +217,7 @@ export default function Portfolio() {
             <div className="mb-12">
               <h2 className="text-2xl font-light mb-2">Selected Work</h2>
               <p className="text-gray-400 text-sm">
-                Systems and applications I've built
+                Systems and applications I&apos;ve built
               </p>
             </div>
 
@@ -232,8 +230,8 @@ export default function Portfolio() {
                 }) => (
                   <div
                     className="group border-b border-gray-900 py-6 cursor-pointer transition-all duration-300 hover:bg-gray-900/50"
-                    onMouseEnter={() => setActiveSection(`project-${index}`)}
-                    onMouseLeave={() => setActiveSection(null)}
+                    onMouseEnter={() => {}}
+                    onMouseLeave={() => {}}
                   >
                     {children}
                   </div>
@@ -313,8 +311,8 @@ export default function Portfolio() {
                     <div
                       key={index}
                       className="group cursor-pointer transition-all duration-300"
-                      onMouseEnter={() => setActiveSection(`exp-${index}`)}
-                      onMouseLeave={() => setActiveSection(null)}
+                      onMouseEnter={() => {}}
+                      onMouseLeave={() => {}}
                     >
                       <div className="mb-4">
                         <div className="text-sm text-gray-400 mb-1">
@@ -376,10 +374,8 @@ export default function Portfolio() {
                     <div
                       key={index}
                       className="group cursor-pointer transition-all duration-300"
-                      onMouseEnter={() =>
-                        setActiveSection(`freelance-${index}`)
-                      }
-                      onMouseLeave={() => setActiveSection(null)}
+                      onMouseEnter={() => {}}
+                      onMouseLeave={() => {}}
                     >
                       <div className="mb-4">
                         <div className="text-sm text-gray-400 mb-1">
@@ -438,7 +434,7 @@ export default function Portfolio() {
                 <h2 className="text-2xl font-light mb-6">About</h2>
                 <div className="space-y-4 text-gray-300 leading-relaxed">
                   <p className="text-lg font-light">
-                    I'm a software engineer with{" "}
+                    I&apos;m a software engineer with{" "}
                     <span className="font-medium text-blue-400">1 year</span> of
                     experience building systems that solve real problems.
                   </p>
@@ -446,10 +442,10 @@ export default function Portfolio() {
                   <p className="text-sm text-gray-400">
                     Currently working as a{" "}
                     <strong>software engineer intern</strong> at HealthPilot —
-                    building a platform to scale doctor's expertise beyond their
-                    time and presence by automating administrative tasks such as
-                    user onboarding, privilege management, and personalized care
-                    plans for patients.
+                    building a platform to scale doctor&apos;s expertise beyond
+                    their time and presence by automating administrative tasks
+                    such as user onboarding, privilege management, and
+                    personalized care plans for patients.
                   </p>
                 </div>
               </div>
@@ -512,7 +508,7 @@ export default function Portfolio() {
           <section className="py-20 border-t border-gray-800">
             <div className="text-center">
               <h2 className="text-2xl font-light mb-6">
-                Let's build something together
+                Let&apos;s build something together
               </h2>
               <p className="text-gray-300 mb-8 max-w-md mx-auto">
                 Always excited about new challenges and innovative projects.
