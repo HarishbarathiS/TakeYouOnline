@@ -60,7 +60,7 @@ export default function Portfolio() {
       link: "https://splitease-up.railway.app/",
     },
     {
-      title: "Infophere",
+      title: "Infosphere",
       year: "2025",
       description:
         "An end-to-end task management platform for streamlined project workflow approvals. Developed a dynamic workflow system where project managers create tasks that pass through multiple review and correction stages, with automatic routing based on task status. Integrated versioned file uploads, access control, and a clean UI for team collaboration, ensuring transparent task histories and improved turnaround efficiency.",
@@ -133,7 +133,7 @@ export default function Portfolio() {
   const freelanceWork = [
     {
       project: "Employee Task Management System",
-      client: "Unknown..",
+      client: "B2k",
       period: "2025 - Present",
       // type: "6 months",
       description:
@@ -145,7 +145,6 @@ export default function Portfolio() {
         "Project management",
         "Task prioritization",
         "Task status tracking",
-        "Task completion tracking",
         "Task completion tracking",
       ],
       tech: [
@@ -233,7 +232,7 @@ export default function Portfolio() {
                 </h1>
                 <p className="text-gray-300 text-lg leading-relaxed">
                   I am passionate about building scalable systems, elegant
-                  architectures, and tools that make a difference.
+                  architectures, and products that make a difference.
                 </p>
               </div>
               <div className="relative">
@@ -511,7 +510,7 @@ export default function Portfolio() {
                       "Python",
                       "JavaScript",
                       "TypeScript",
-                      "React",
+                      "React.js",
                       "Next.js",
                       "Flask",
                       "Node.js",
@@ -521,8 +520,6 @@ export default function Portfolio() {
                       "MongoDB",
                       "Docker",
                       "Git",
-                      "Tailwind CSS",
-                      "Whisper",
                     ].map((skill) => (
                       <div key={skill} className="py-1">
                         {skill}
