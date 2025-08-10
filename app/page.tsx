@@ -57,7 +57,7 @@ export default function Portfolio() {
         "Tailwind CSS",
         "Vercel",
       ],
-      link: "https://splitease-up.railway.app/",
+      link: "https://splitease-jzdl.onrender.com",
     },
     {
       title: "Infosphere",
@@ -72,7 +72,7 @@ export default function Portfolio() {
         "Supabase",
         "Vercel",
       ],
-      link: "https://github.com/HarishbarathiS/infophere",
+      link: "https://github.com/HarishbarathiS/infosphere",
     },
     {
       title: "Dit",
@@ -108,10 +108,10 @@ export default function Portfolio() {
       period: "June 2025 - Present",
       location: "Chennai",
       description:
-        "Building a platform to scale doctor&apos;s expertise beyond their time and presence by automating administrative tasks such as user onboarding, privilege management, personalized care plans for patients.",
+        "Building a platform to scale doctor's expertise beyond their time and presence by automating administrative tasks such as user onboarding, privilege management, personalized care plans for patients.",
       achievements: [
         "Designed the database schema for the application to handle various things like medical records, patient data and doctor appointments and made sure to be scalable for millions of users",
-        "Currently working on the integration AI of solutions like Speech to Text, Speaker diarisation and a knowledge base for context to created LLM",
+        "Currently working on the integration of AI solutions like Speech to Text, Speaker diarisation and a knowledge base for context to create LLM",
       ],
       tech: ["React", "JavaScript", "TypeScript", "MySQL"],
     },
