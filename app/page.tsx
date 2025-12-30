@@ -271,7 +271,7 @@ export default function Portfolio() {
           <section className="min-h-[90vh] flex flex-col justify-center relative z-10">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
               <div className="lg:col-span-12 xl:col-span-8">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 mb-8 animate-fade-in">
+                {/* <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 mb-8 animate-fade-in">
                   <span className="relative flex h-2 w-2">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                     <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
@@ -279,7 +279,7 @@ export default function Portfolio() {
                   <span className="text-[10px] md:text-xs font-mono text-gray-400 uppercase tracking-wider">
                     Available for new opportunities
                   </span>
-                </div>
+                </div> */}
                 <h1 className="text-5xl md:text-7xl lg:text-8xl font-heading font-bold leading-[0.9] mb-8 text-gradient">
                   Crafting software
                   <br />
