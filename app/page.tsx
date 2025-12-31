@@ -594,7 +594,7 @@ export default function Portfolio() {
                 Let&apos;s build something <span className="text-white/40 italic">meaningful</span>
               </h2>
               <p className="text-gray-400 mb-8 md:mb-12 max-w-xl mx-auto text-base md:text-lg font-light leading-relaxed">
-                Always excited about new challenges and innovative projects.
+                Always excited about new challenges and innovative systems.
                 Reach out if you want to discuss building something exceptional.
               </p>
 

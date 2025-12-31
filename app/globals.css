@@ -168,13 +168,21 @@
 
   .border-beam {
     position: absolute;
+    top: 0;
+    left: 0;
     width: 60px;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, white, transparent);
-    z-index: -1;
-    /* This creates a path following the rounded-full boundary */
-    offset-path: border-box;
-    animation: border-beam-anim 6s linear infinite;
+    height: 1.5px;
+    /* Subtler gradient for "minimal" visibility but high quality */
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
+    /* Higher than container background but below text/content */
+    z-index: 1;
+    filter: blur(1px) brightness(1.2);
+    pointer-events: none;
+    /* Center the beam on the path */
+    offset-anchor: 50% 50%;
+    /* Use inset to follow the exact pill shape perfectly including corners */
+    offset-path: inset(0 round 9999px);
+    animation: border-beam-anim 8s linear infinite;
   }
 
   @keyframes border-beam-anim {

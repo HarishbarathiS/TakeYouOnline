@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   description:
     "Software engineer passionate about building scalable systems, elegant architectures, and tools that make a difference. Currently working at HealthPilot.",
   icons: {
-    icon: "/icon.png",
+    icon: "/icon.svg",
   },
 };
 
