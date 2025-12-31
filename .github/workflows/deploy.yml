@@ -64,7 +64,7 @@ jobs:
             cat <<EOF > docker-compose.yml
             services:
               takeyouonline:
-                image: ghcr.io/HarishbarathiS/takeyouonline:latest
+                image: ghcr.io/harishbarathis/takeyouonline:latest
                 ports:
                   - "3000:3000"
                 restart: always
