@@ -1,13 +1,22 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
-import { ArrowUpRight, Mail, Github, Linkedin } from "lucide-react";
+import { ArrowUpRight, Mail, Github, Linkedin, Menu, X } from "lucide-react";
 
 export default function Portfolio() {
-  const date = new Date();
+  const [time, setTime] = React.useState<Date | null>(null);
   const eyesRef = useRef<HTMLDivElement>(null);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
 
   useEffect(() => {
+    // Set initial time on client
+    setTime(new Date());
+
+    // Update time every second
+    const timer = setInterval(() => {
+      setTime(new Date());
+    }, 1000);
+
     const handleMouseMove = (e: MouseEvent) => {
       if (eyesRef.current) {
         const eyes = eyesRef.current.querySelectorAll(".eye");
@@ -40,7 +49,10 @@ export default function Portfolio() {
     };
 
     document.addEventListener("mousemove", handleMouseMove);
-    return () => document.removeEventListener("mousemove", handleMouseMove);
+    return () => {
+      document.removeEventListener("mousemove", handleMouseMove);
+      clearInterval(timer);
+    };
   }, []);
 
   const projects = [
@@ -223,37 +235,77 @@ export default function Portfolio() {
       </div>
 
       {/* Header */}
-      <header className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-5xl">
-        <div className="border-beam-container">
+      <header className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-2rem)] md:w-[95%] max-w-5xl">
+        <div className="border-beam-container bg-black/40 backdrop-blur-xl rounded-full border border-white/10">
           <div className="border-beam"></div>
-          <div className="glass-dark rounded-full px-6 py-3 relative z-10">
+          <div className="px-6 py-3 relative z-10">
             <div className="flex justify-between items-center">
               <div className="text-sm font-heading font-semibold tracking-tight">
                 <span>Harish Barathi S</span>
               </div>
-              <div className="flex items-center gap-6">
+
+              <div className="flex items-center gap-4">
+                {/* Desktop Nav */}
                 <nav className="hidden md:flex items-center gap-6 text-xs font-mono text-gray-400">
                   <a href="#work" className="hover:text-white transition-colors">WORK</a>
                   <a href="#experience" className="hover:text-white transition-colors">EXP</a>
                   <a href="#about" className="hover:text-white transition-colors">ABOUT</a>
                 </nav>
+
+                {/* Mobile Menu Button */}
+                <button
+                  className="md:hidden text-white p-1"
+                  onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                >
+                  {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+                </button>
               </div>
             </div>
           </div>
         </div>
+
+        {/* Mobile Menu Dropdown */}
+        {isMobileMenuOpen && (
+          <div className="absolute top-full left-0 w-full mt-2 p-4 glass-dark rounded-3xl border border-white/10 flex flex-col gap-4 md:hidden animate-in fade-in slide-in-from-top-5">
+            <nav className="flex flex-col gap-4 text-sm font-mono text-gray-400">
+              <a href="#work" className="hover:text-white transition-colors p-2" onClick={() => setIsMobileMenuOpen(false)}>WORK</a>
+              <a href="#experience" className="hover:text-white transition-colors p-2" onClick={() => setIsMobileMenuOpen(false)}>EXP</a>
+              <a href="#about" className="hover:text-white transition-colors p-2" onClick={() => setIsMobileMenuOpen(false)}>ABOUT</a>
+            </nav>
+            <div className="h-[1px] bg-white/10 w-full"></div>
+            <div className="flex flex-col gap-3 p-2">
+              <div className="flex justify-between items-center">
+                <span className="text-[10px] text-gray-500 uppercase tracking-widest">Local Time</span>
+                <span className="text-xs font-mono text-white">
+                  {time ? time.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'Asia/Kolkata' }) : '00:00:00'}
+                </span>
+              </div>
+              <div className="flex justify-between items-center">
+                <span className="text-[10px] text-gray-500 uppercase tracking-widest">Location</span>
+                <div className="flex items-center gap-2">
+                  <span className="text-xs font-mono text-white uppercase">Chennai, IN</span>
+                  <span className="relative flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </header>
 
-      {/* External Location Marker */}
+      {/* External Location Marker (Desktop Only) */}
       <div className="fixed top-6 right-6 z-50 hidden md:flex items-center gap-3">
         <div className="flex flex-col items-end">
-          <span className="text-[10px] text-gray-400 font-mono uppercase tracking-widest">Local Time</span>
+          <span className="hidden md:block text-[10px] text-gray-400 font-mono uppercase tracking-widest">Local Time</span>
           <span className="text-xs font-mono text-white">
-            {date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'Asia/Kolkata' })}
+            {time ? time.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'Asia/Kolkata' }) : '00:00:00'}
           </span>
         </div>
         <div className="h-8 w-[1px] bg-white/10 mx-1"></div>
         <div className="flex flex-col items-end">
-          <span className="text-[10px] text-gray-400 font-mono uppercase tracking-widest">Location</span>
+          <span className="hidden md:block text-[10px] text-gray-400 font-mono uppercase tracking-widest">Location</span>
           <div className="flex items-center gap-2">
             <span className="text-xs font-mono text-white uppercase">Chennai, IN</span>
             <span className="relative flex h-2 w-2">
@@ -268,9 +320,9 @@ export default function Portfolio() {
       <main className="pt-20 pb-12">
         <div className="max-w-6xl mx-auto px-6">
           {/* Hero Section */}
-          <section className="min-h-[90vh] flex flex-col justify-center relative z-10">
+          <section className="min-h-[85vh] md:min-h-[90vh] flex flex-col justify-center relative z-10 pt-20 md:pt-0">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-              <div className="lg:col-span-12 xl:col-span-8">
+              <div className="lg:col-span-12 xl:col-span-8 flex flex-col items-center text-center lg:items-start lg:text-left">
                 {/* <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 mb-8 animate-fade-in">
                   <span className="relative flex h-2 w-2">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
@@ -280,40 +332,40 @@ export default function Portfolio() {
                     Available for new opportunities
                   </span>
                 </div> */}
-                <h1 className="text-5xl md:text-7xl lg:text-8xl font-heading font-bold leading-[0.9] mb-8 text-gradient">
+                <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-heading font-bold leading-[1.1] md:leading-[0.9] mb-6 md:mb-8 text-gradient">
                   Crafting software
-                  <br />
-
+                  <br className="hidden md:block" />
+                  <span className="md:hidden"> </span>
                   that solves{" "}
                   <span className="italic font-light text-white/60">
                     real problems
                   </span>
                 </h1>
-                <p className="text-gray-400 text-lg md:text-xl leading-relaxed max-w-2xl font-light">
+                <p className="text-gray-400 text-base md:text-xl leading-relaxed max-w-xl md:max-w-2xl font-light mb-8 md:mb-0">
                   A software engineer passionate about building scalable systems,
                   elegant architectures, and products that make a meaningful difference.
                 </p>
-                <div className="mt-10 flex flex-wrap gap-4">
-                  <a href="#work" className="px-8 py-4 bg-white text-black rounded-full font-medium text-sm hover:bg-gray-200 transition-all flex items-center gap-2 group">
+                <div className="mt-8 md:mt-10 flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+                  <a href="#work" className="px-8 py-4 bg-white text-black rounded-full font-medium text-sm hover:bg-gray-200 transition-all flex items-center justify-center gap-2 group w-full sm:w-auto">
                     View My Work
                     <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                   </a>
-                  <a href="mailto:iharishbarathis@gmail.com" className="px-8 py-4 glass text-white rounded-full font-medium text-sm hover:bg-white/10 transition-all">
+                  <a href="mailto:iharishbarathis@gmail.com" className="px-8 py-4 glass text-white rounded-full font-medium text-sm hover:bg-white/10 transition-all w-full sm:w-auto justify-center flex">
                     Get in touch
                   </a>
                 </div>
               </div>
 
               {/* Eye Section Integrated into Grid but shifted */}
-              <div className="lg:col-span-12 xl:col-span-4 flex justify-center xl:justify-end">
-                <div className="relative group">
+              <div className="lg:col-span-12 xl:col-span-4 flex justify-center xl:justify-end mt-8 lg:mt-0">
+                <div className="relative group scale-50 sm:scale-75 lg:scale-100">
                   <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full blur opacity-10 group-hover:opacity-20 transition duration-1000"></div>
                   <div className="relative w-64 h-64 flex items-center justify-center">
-                    {/* Ripple Waves */}
-                    <div className="ripple"></div>
-                    <div className="ripple"></div>
-                    <div className="ripple"></div>
-                    <div className="ripple"></div>
+                    {/* Ripple Waves - Vibrant background-themed colors */}
+                    <div className="ripple text-blue-500/40"></div>
+                    <div className="ripple text-purple-500/40"></div>
+                    <div className="ripple text-indigo-500/40"></div>
+                    <div className="ripple text-blue-400/30"></div>
 
                     {/* Main Ball Container */}
                     <div className="relative w-full h-full bg-black/40 backdrop-blur-xl rounded-full flex items-center justify-center border border-white/10 overflow-hidden z-10">
@@ -338,8 +390,8 @@ export default function Portfolio() {
           </section>
 
           {/* Work Section */}
-          <section id="work" className="py-32 border-t border-white/5 relative z-10">
-            <div className="mb-16">
+          <section id="work" className="py-16 md:py-32 border-t border-white/5 relative z-10">
+            <div className="mb-12 md:mb-16">
               <h2 className="text-3xl md:text-5xl font-heading font-bold mb-4">Selected Work</h2>
               <p className="text-gray-500 font-mono text-xs uppercase tracking-widest">
                 / Systems and applications I&apos;ve built
@@ -355,7 +407,7 @@ export default function Portfolio() {
                   rel="noopener noreferrer"
                   className="group block"
                 >
-                  <div className="h-full glass-dark rounded-3xl p-8 border border-white/5 hover:border-white/20 transition-all duration-500 hover:-translate-y-2 flex flex-col">
+                  <div className="h-full glass-dark rounded-3xl p-6 md:p-8 border border-white/5 hover:border-white/20 transition-all duration-500 hover:-translate-y-2 flex flex-col">
                     <div className="flex justify-between items-start mb-6">
                       <div className="flex flex-wrap gap-2">
                         {project.tech.slice(0, 3).map((tech, techIndex) => (
@@ -395,8 +447,8 @@ export default function Portfolio() {
           </section>
 
           {/* Experience & Freelance Section */}
-          <section id="experience" className="py-32 border-t border-white/5 relative z-10">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-24">
+          <section id="experience" className="py-16 md:py-32 border-t border-white/5 relative z-10">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24">
               {/* Experience Column */}
               <div>
                 <div className="mb-12">
@@ -443,7 +495,7 @@ export default function Portfolio() {
 
                 <div className="space-y-16">
                   {freelanceWork.map((work, index) => (
-                    <div key={index} className="glass-dark rounded-3xl p-8 border border-white/5">
+                    <div key={index} className="glass-dark rounded-3xl p-6 md:p-8 border border-white/5">
                       <div className="text-gray-500 font-mono text-[10px] uppercase tracking-widest mb-2">{work.period}</div>
                       <h4 className="text-xl font-heading font-bold mb-1">{work.project}</h4>
                       <div className="text-purple-400 font-medium mb-4">{work.client}</div>
@@ -473,8 +525,8 @@ export default function Portfolio() {
           </section>
 
           {/* About & Technologies Section */}
-          <section id="about" className="py-32 border-t border-white/5 relative z-10">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-24">
+          <section id="about" className="py-16 md:py-32 border-t border-white/5 relative z-10">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24">
               <div>
                 <h2 className="text-3xl font-heading font-bold mb-8">Background</h2>
                 <div className="space-y-6 text-gray-400 leading-relaxed font-light">
@@ -534,14 +586,14 @@ export default function Portfolio() {
           </section>
 
           {/* Contact Section */}
-          <section className="py-32 border-t border-white/5 relative z-10">
-            <div className="glass-dark rounded-[3rem] p-12 md:p-20 text-center border border-white/10 relative overflow-hidden group">
+          <section className="py-16 md:py-32 border-t border-white/5 relative z-10">
+            <div className="glass-dark rounded-[2rem] md:rounded-[3rem] p-8 md:p-20 text-center border border-white/10 relative overflow-hidden group">
               <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500/10 blur-[100px] rounded-full translate-x-1/2 -translate-y-1/2"></div>
 
-              <h2 className="text-4xl md:text-6xl font-heading font-bold mb-8 transition-transform group-hover:scale-[1.02] duration-500">
+              <h2 className="text-3xl md:text-6xl font-heading font-bold mb-6 md:mb-8 transition-transform group-hover:scale-[1.02] duration-500">
                 Let&apos;s build something <span className="text-white/40 italic">meaningful</span>
               </h2>
-              <p className="text-gray-400 mb-12 max-w-xl mx-auto text-lg font-light leading-relaxed">
+              <p className="text-gray-400 mb-8 md:mb-12 max-w-xl mx-auto text-base md:text-lg font-light leading-relaxed">
                 Always excited about new challenges and innovative projects.
                 Reach out if you want to discuss building something exceptional.
               </p>
@@ -549,12 +601,12 @@ export default function Portfolio() {
               <div className="flex flex-wrap justify-center gap-4">
                 <a
                   href="mailto:iharishbarathis@gmail.com"
-                  className="flex items-center gap-3 px-8 py-4 bg-white text-black rounded-full hover:bg-gray-200 transition-all font-medium"
+                  className="flex items-center gap-3 px-8 py-4 bg-white text-black rounded-full hover:bg-gray-200 transition-all font-medium w-full sm:w-auto justify-center"
                 >
                   <Mail className="w-5 h-5" />
                   Email Me
                 </a>
-                <div className="flex gap-4">
+                <div className="flex gap-4 w-full sm:w-auto justify-center">
                   <a
                     href="https://github.com/HarishbarathiS"
                     className="flex items-center justify-center w-14 h-14 glass text-white rounded-full hover:bg-white/10 transition-all border border-white/10"
@@ -574,17 +626,17 @@ export default function Portfolio() {
             </div>
           </section>
         </div>
-      </main>
+      </main >
 
       {/* Footer */}
-      <footer className="border-t border-white/5 py-12 relative z-10">
+      < footer className="border-t border-white/5 py-12 relative z-10" >
         <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6 text-sm text-gray-500 font-mono">
           <div>© 2025 HARISH BARATHI S</div>
           <div className="flex gap-8">
             <a href="https://github.com/HarishbarathiS/TakeYouOnline" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">SOURCE CODE</a>
           </div>
         </div>
-      </footer>
-    </div>
+      </footer >
+    </div >
   );
 }

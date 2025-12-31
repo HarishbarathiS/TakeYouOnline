@@ -26,6 +26,9 @@ export const metadata: Metadata = {
   title: "Harish Barathi S - Software Engineer",
   description:
     "Software engineer passionate about building scalable systems, elegant architectures, and tools that make a difference. Currently working at HealthPilot.",
+  icons: {
+    icon: "/icon.png",
+  },
 };
 
 export default function RootLayout({

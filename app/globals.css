@@ -109,9 +109,12 @@
     @apply border-border outline-ring/50;
   }
 
+  html,
   body {
     @apply bg-background text-foreground selection:bg-white selection:text-black;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    overflow-x: hidden;
+    width: 100%;
   }
 
   h1,
@@ -146,8 +149,8 @@
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     opacity: 0.03;
     z-index: 100;
     pointer-events: none;
@@ -192,7 +195,8 @@
     width: 100%;
     height: 100%;
     border-radius: 50%;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid currentColor;
+    box-shadow: 0 0 25px currentColor, inset 0 0 10px currentColor;
     animation: ripple 4s linear infinite;
     pointer-events: none;
   }
