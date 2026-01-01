@@ -390,7 +390,7 @@ export default function Portfolio() {
           </section>
 
           {/* Work Section */}
-          <section id="work" className="py-16 md:py-32 border-t border-white/5 relative z-10">
+          <section id="work" className="py-16 md:py-32 border-t border-white/5 relative z-10 scroll-mt-24">
             <div className="mb-12 md:mb-16">
               <h2 className="text-3xl md:text-5xl font-heading font-bold mb-4">Selected Work</h2>
               <p className="text-gray-500 font-mono text-xs uppercase tracking-widest">
@@ -447,7 +447,7 @@ export default function Portfolio() {
           </section>
 
           {/* Experience & Freelance Section */}
-          <section id="experience" className="py-16 md:py-32 border-t border-white/5 relative z-10">
+          <section id="experience" className="py-16 md:py-32 border-t border-white/5 relative z-10 scroll-mt-24">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24">
               {/* Experience Column */}
               <div>
@@ -525,7 +525,7 @@ export default function Portfolio() {
           </section>
 
           {/* About & Technologies Section */}
-          <section id="about" className="py-16 md:py-32 border-t border-white/5 relative z-10">
+          <section id="about" className="py-16 md:py-32 border-t border-white/5 relative z-10 scroll-mt-24">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24">
               <div>
                 <h2 className="text-3xl font-heading font-bold mb-8">Background</h2>
