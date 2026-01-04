@@ -1,0 +1,54 @@
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Glow effect for squares -->
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="1.5" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    
+    <!-- Blue gradient for squares -->
+    <linearGradient id="blueGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2563eb;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background - transparent for dark theme -->
+  <rect width="32" height="32" fill="transparent"/>
+  
+  <!-- Top-left square (back layer) -->
+  <rect
+    x="4"
+    y="4"
+    width="12"
+    height="12"
+    fill="url(#blueGradient)"
+    filter="url(#glow)"
+    opacity="0.9"
+  />
+  
+  <!-- Middle square (middle layer) - partially overlapping top-left -->
+  <rect
+    x="8"
+    y="8"
+    width="12"
+    height="12"
+    fill="url(#blueGradient)"
+    filter="url(#glow)"
+    opacity="0.95"
+  />
+  
+  <!-- Bottom-right square (front layer) - partially overlapping middle -->
+  <rect
+    x="12"
+    y="12"
+    width="12"
+    height="12"
+    fill="url(#blueGradient)"
+    filter="url(#glow)"
+    opacity="1"
+  />
+</svg>

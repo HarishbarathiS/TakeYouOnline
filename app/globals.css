@@ -250,3 +250,257 @@
     background-position: -200% 0;
   }
 }
+
+@keyframes request-to-center-left {
+  0% {
+    left: 0;
+    opacity: 0;
+  }
+
+  20% {
+    opacity: 1;
+  }
+
+  100% {
+    left: 50%;
+    opacity: 0;
+  }
+}
+
+@keyframes request-to-center-right {
+  0% {
+    right: 0;
+    opacity: 0;
+  }
+
+  20% {
+    opacity: 1;
+  }
+
+  100% {
+    right: 50%;
+    opacity: 0;
+  }
+}
+
+@keyframes request-to-center-top {
+  0% {
+    top: 0;
+    opacity: 0;
+  }
+
+  20% {
+    opacity: 1;
+  }
+
+  100% {
+    top: 50%;
+    opacity: 0;
+  }
+}
+
+@keyframes request-to-center-bottom {
+  0% {
+    bottom: 0;
+    opacity: 0;
+  }
+
+  20% {
+    opacity: 1;
+  }
+
+  100% {
+    bottom: 50%;
+    opacity: 0;
+  }
+}
+
+.animate-request-to-center-left {
+  animation: request-to-center-left 2s ease-in infinite;
+}
+
+.animate-request-to-center-right {
+  animation: request-to-center-right 2.2s ease-in infinite;
+}
+
+.animate-request-to-center-top {
+  animation: request-to-center-top 1.8s ease-in infinite;
+}
+
+.animate-request-to-center-bottom {
+  animation: request-to-center-bottom 2.5s ease-in infinite;
+}
+
+@keyframes flow-horizontal {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+
+  20% {
+    opacity: 0.5;
+  }
+
+  80% {
+    opacity: 0.5;
+  }
+
+  100% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+@keyframes flow-vertical {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+
+  20% {
+    opacity: 0.4;
+  }
+
+  80% {
+    opacity: 0.4;
+  }
+
+  100% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+}
+
+.animate-flow-horizontal {
+  animation: flow-horizontal 3s linear infinite;
+}
+
+.animate-flow-vertical {
+  animation: flow-vertical 3s linear infinite;
+}
+
+.delay-100 {
+  animation-delay: 100ms;
+}
+
+.delay-200 {
+  animation-delay: 200ms;
+}
+
+.delay-300 {
+  animation-delay: 300ms;
+}
+
+.delay-500 {
+  animation-delay: 500ms;
+}
+
+.delay-700 {
+  animation-delay: 700ms;
+}
+
+.delay-1000 {
+  animation-delay: 1000ms;
+}
+
+@keyframes pulse-glow {
+  0% {
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4);
+  }
+
+  70% {
+    box-shadow: 0 0 0 15px rgba(59, 130, 246, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0);
+  }
+}
+
+@keyframes rotate-slow {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rotate-slow-reverse {
+  from {
+    transform: rotate(360deg);
+  }
+
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes grid-drift {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 40px 40px;
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s infinite;
+}
+
+.animate-rotate-slow {
+  animation: rotate-slow 12s linear infinite;
+}
+
+.animate-rotate-slow-reverse {
+  animation: rotate-slow-reverse 15s linear infinite;
+}
+
+.network-grid {
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 40px 40px;
+  animation: grid-drift 20s linear infinite;
+}
+
+.hud-label {
+  @apply text-[9px] font-mono text-gray-500 uppercase tracking-tighter;
+}
+
+.hud-value {
+  @apply text-[10px] font-mono text-blue-400 font-bold;
+}
+
+.delay-1200 {
+  animation-delay: 1200ms;
+}
+
+.delay-1500 {
+  animation-delay: 1500ms;
+}
+
+.delay-1700 {
+  animation-delay: 1700ms;
+}
+
+@keyframes shimmer {
+  0% {
+    stroke-dashoffset: 20;
+    opacity: 0.3;
+  }
+
+  50% {
+    opacity: 0.8;
+  }
+
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 0.3;
+  }
+}
+
+.animate-shimmer {
+  animation: shimmer 2s linear infinite;
+}

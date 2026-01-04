@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
-import { ArrowUpRight, Mail, Github, Linkedin, Menu, X } from "lucide-react";
+import { ArrowUpRight, Mail, Github, Linkedin, Menu, X, Server, Cpu, Activity } from "lucide-react";
+import Link from "next/link";
 
 export default function Portfolio() {
   const [time, setTime] = React.useState<Date | null>(null);
@@ -249,6 +250,7 @@ export default function Portfolio() {
                 <nav className="hidden md:flex items-center gap-6 text-xs font-mono text-gray-400">
                   <a href="#work" className="hover:text-white transition-colors">WORK</a>
                   <a href="#experience" className="hover:text-white transition-colors">EXP</a>
+                  <a href="/lab" className="hover:text-white transition-colors uppercase">Lab</a>
                   <a href="#about" className="hover:text-white transition-colors">ABOUT</a>
                 </nav>
 
@@ -270,6 +272,7 @@ export default function Portfolio() {
             <nav className="flex flex-col gap-4 text-sm font-mono text-gray-400">
               <a href="#work" className="hover:text-white transition-colors p-2" onClick={() => setIsMobileMenuOpen(false)}>WORK</a>
               <a href="#experience" className="hover:text-white transition-colors p-2" onClick={() => setIsMobileMenuOpen(false)}>EXP</a>
+              <a href="/lab" className="hover:text-white transition-colors p-2 uppercase" onClick={() => setIsMobileMenuOpen(false)}>Lab</a>
               <a href="#about" className="hover:text-white transition-colors p-2" onClick={() => setIsMobileMenuOpen(false)}>ABOUT</a>
             </nav>
             <div className="h-[1px] bg-white/10 w-full"></div>
@@ -443,6 +446,136 @@ export default function Portfolio() {
                   </div>
                 </a>
               ))}
+            </div>
+          </section>
+
+          {/* Lab Section Preview */}
+          <section id="lab" className="py-10 md:py-22 border-t border-white/5 relative z-10 scroll-mt-24">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center">
+              <div>
+                <div className="mb-8">
+                  <h2 className="text-3xl md:text-5xl font-heading font-bold mb-4">Home Lab</h2>
+                  <p className="text-gray-500 font-mono text-xs uppercase tracking-widest">/ Private infrastructure and experiments</p>
+                </div>
+
+                <div className="space-y-6 text-gray-400 leading-relaxed font-light mb-10">
+                  <p className="text-xl text-white">
+                    Exploring the world of <span className="text-blue-400">self-hosting</span> and
+                    <span className="text-purple-400"> high-performance computing</span>.
+                  </p>
+                  <p>
+                    I host my own cloud infrastructure to maintain full control over my data and
+                    experiment with production-grade architectures in a localized environment.
+                  </p>
+                </div>
+
+                <Link
+                  href="/lab"
+                  className="inline-flex items-center gap-3 px-8 py-4 bg-white text-black rounded-full hover:bg-gray-200 transition-all font-medium group"
+                >
+                  Explore Home Lab
+                  <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                </Link>
+              </div>
+
+              <div className="flex items-center justify-center relative scale-90 md:scale-100">
+                <div className="absolute inset-0 network-grid opacity-20 z-0"></div>
+                <div className="relative w-full aspect-square max-w-md flex items-center justify-center">
+
+                  {/* Central SVG Layer for Connections */}
+                  <div className="absolute inset-0 z-10 pointer-events-none">
+                    <svg viewBox="0 0 400 400" className="w-full h-full overflow-visible">
+
+                      {/* Lines from Center (200, 200) to Nodes */}
+                      {/* SplitEase (60, 60) */}
+                      <path d="M 200 200 L 60 60" stroke="#3b82f6" strokeWidth="2" strokeDasharray="6 6" className="animate-shimmer" strokeOpacity="0.4" />
+                      {/* n8n (340, 60) */}
+                      <path d="M 200 200 L 340 60" stroke="#a78bfa" strokeWidth="2" strokeDasharray="6 6" className="animate-shimmer" strokeOpacity="0.4" />
+                      {/* Supabase (200, 360) */}
+                      <path d="M 200 200 L 200 360" stroke="#34d399" strokeWidth="2" strokeDasharray="6 6" className="animate-shimmer" strokeOpacity="0.4" />
+
+                      {/* Moving Data Packets */}
+                      <rect width="8" height="8" x="-4" y="-4" fill="#60a5fa" className="animate-shimmer">
+                        <animateMotion dur="3s" repeatCount="indefinite" path="M 200 200 L 60 60" rotate="auto" begin="0s" />
+                      </rect>
+                      <rect width="8" height="8" x="-4" y="-4" fill="#60a5fa" className="animate-shimmer" opacity="0.4">
+                        <animateMotion dur="3s" repeatCount="indefinite" path="M 200 200 L 60 60" rotate="auto" begin="0.3s" />
+                      </rect>
+                      <rect width="8" height="8" x="-4" y="-4" fill="#60a5fa" className="animate-shimmer" opacity="0.2">
+                        <animateMotion dur="3s" repeatCount="indefinite" path="M 200 200 L 60 60" rotate="auto" begin="0.6s" />
+                      </rect>
+
+                      {/* <rect width="8" height="8" x="-4" y="-4" fill="#a78bfa" className="animate-shimmer">
+                        <animateMotion dur="2.5s" repeatCount="indefinite" path="M 200 200 L 340 60" rotate="auto" begin="0s" />
+                      </rect>
+                      <rect width="8" height="8" x="-4" y="-4" fill="#a78bfa" className="animate-shimmer" opacity="0.4">
+                        <animateMotion dur="2.5s" repeatCount="indefinite" path="M 200 200 L 340 60" rotate="auto" begin="0.2s" />
+                      </rect>
+                      <rect width="8" height="8" x="-4" y="-4" fill="#a78bfa" className="animate-shimmer" opacity="0.2">
+                        <animateMotion dur="2.5s" repeatCount="indefinite" path="M 200 200 L 340 60" rotate="auto" begin="0.4s" />
+                      </rect>
+
+                      <rect width="8" height="8" x="-4" y="-4" fill="#34d399" className="animate-shimmer">
+                        <animateMotion dur="4s" repeatCount="indefinite" path="M 200 200 L 200 360" rotate="auto" begin="0s" />
+                      </rect>
+                      <rect width="8" height="8" x="-4" y="-4" fill="#34d399" className="animate-shimmer" opacity="0.4">
+                        <animateMotion dur="4s" repeatCount="indefinite" path="M 200 200 L 200 360" rotate="auto" begin="0.4s" />
+                      </rect>
+                      <rect width="8" height="8" x="-4" y="-4" fill="#34d399" className="animate-shimmer" opacity="0.2">
+                        <animateMotion dur="4s" repeatCount="indefinite" path="M 200 200 L 200 360" rotate="auto" begin="0.8s" />
+                      </rect> */}
+                    </svg>
+                  </div>
+
+                  {/* Central Node: The-Harish-Machine */}
+                  <div className="relative z-20">
+                    <div className="w-32 h-32 bg-blue-500/10 backdrop-blur-3xl rounded-3xl border border-blue-500/30 flex flex-col items-center justify-center group hover:border-blue-500/50 transition-all duration-500">
+                      <Server size={48} className="text-blue-400 group-hover:scale-110 transition-transform duration-500" />
+                      <span className="text-[8px] font-mono mt-2 text-blue-300 uppercase opacity-60">Master Node</span>
+                    </div>
+                  </div>
+
+                  {/* Orbiting Service Nodes */}
+                  <div className="absolute inset-0 z-20 pointer-events-none">
+                    {/* SplitEase Node */}
+                    <div className="absolute top-[15%] left-[15%] pointer-events-auto group -translate-x-1/2 -translate-y-1/2">
+                      <div className="w-16 h-16 bg-black/60 backdrop-blur-xl rounded-2xl border border-white/10 flex items-center justify-center hover:border-blue-400/50 transition-colors duration-500 shadow-xl">
+                        <img src="/splitease.svg" alt="SplitEase" className="w-10 h-10 object-contain" />
+                      </div>
+                      <div className="absolute left-full ml-3 top-1/2 -translate-y-1/2 text-[14px] font-mono whitespace-nowrap">
+                        <span className="text-gray-500 block uppercase tracking-tighter text-[12px]">App</span>
+                        <span className="text-blue-400 font-bold">SplitEase</span>
+                      </div>
+                    </div>
+
+                    {/* n8n Node */}
+                    <div className="absolute top-[15%] right-[15%] pointer-events-auto group translate-x-1/2 -translate-y-1/2">
+                      <div className="w-16 h-16 bg-black/60 backdrop-blur-xl rounded-2xl border border-white/10 flex items-center justify-center hover:border-red-400/50 transition-colors duration-500 shadow-xl">
+                        <img src="/n8n-color.png" alt="n8n" className="w-10 h-10 object-contain" />
+                      </div>
+                      <div className="absolute right-full mr-3 top-1/2 -translate-y-1/2 text-right text-[14px] font-mono whitespace-nowrap">
+                        <span className="text-gray-500 block uppercase tracking-tighter text-[12px]">Automation</span>
+                        <span className="text-purple-400 font-bold">n8n</span>
+                      </div>
+                    </div>
+
+                    {/* Supabase Node */}
+                    <div className="absolute top-[90%] left-[50%] pointer-events-auto group -translate-x-1/2 -translate-y-1/2">
+                      <div className="w-16 h-16 bg-black/60 backdrop-blur-xl rounded-2xl border border-white/10 flex items-center justify-center hover:border-green-400/50 transition-colors duration-500 shadow-xl">
+                        <img src="/supabase-logo.svg" alt="Supabase" className="w-10 h-10 object-contain" />
+                      </div>
+                      <div className="absolute left-full ml-3 top-1/2 -translate-y-1/2 text-[14px] font-mono whitespace-nowrap">
+                        <span className="text-gray-500 block uppercase tracking-tighter text-[12px]">Backend as a Service</span>
+                        <span className="text-green-400 font-bold">Supabase</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Ambient Decorative Orbit */}
+                  <div className="absolute w-[85%] h-[85%] rounded-full border border-white/5 animate-rotate-slow opacity-20 pointer-events-none"></div>
+                  <div className="absolute w-[65%] h-[65%] rounded-full border border-white/5 animate-rotate-slow-reverse opacity-10 pointer-events-none"></div>
+                </div>
+              </div>
             </div>
           </section>
 
