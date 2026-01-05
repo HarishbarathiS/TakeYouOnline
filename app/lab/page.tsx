@@ -1,8 +1,9 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { ArrowLeft, Server, HardDrive, Shield, Activity, ExternalLink, Cpu, Globe, Lock, ArrowUpRight, Menu, X } from "lucide-react";
+import { ArrowLeft, Server, Cpu, ArrowUpRight, Menu, X } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function HomeLab() {
     const [time, setTime] = useState<Date | null>(null);
@@ -23,7 +24,7 @@ export default function HomeLab() {
             status: "Operational",
             description: "Room-based expense splitting platform BETTER THAN SPLITWISE.",
             tech: ["Docker", "Nginx", "GHCR", "Next.js"],
-            icon: <img src="/splitease.svg" alt="SplitEase" className="w-6 h-6 object-contain" />,
+            icon: <Image src="/splitease.svg" alt="SplitEase" width={24} height={24} className="object-contain" />,
             stats: "Active Usage"
         },
         {
@@ -32,7 +33,7 @@ export default function HomeLab() {
             status: "Coming Soon",
             description: "Workflow automation tool to connect and sync data between different applications and services.",
             tech: ["Docker", "Node.js", "PostgreSQL"],
-            icon: <img src="/n8n-color.png" alt="n8n" className="w-6 h-6 object-contain" />,
+            icon: <Image src="/n8n-color.png" alt="n8n" width={24} height={24} className="object-contain" />,
             stats: "15+ Workflows"
         },
         {
@@ -41,7 +42,7 @@ export default function HomeLab() {
             status: "Coming Soon",
             description: "Developing a self-hosted Supabase instance for localized backend management and data sovereignty.",
             tech: ["Docker", "PostgreSQL", "Go", "Realtime"],
-            icon: <img src="/supabase-logo.svg" alt="Supabase" className="w-6 h-6 object-contain" />,
+            icon: <Image src="/supabase-logo.svg" alt="Supabase" width={24} height={24} className="object-contain" />,
             stats: "Planning Phase"
         }
     ];

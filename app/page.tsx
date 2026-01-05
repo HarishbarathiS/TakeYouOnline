@@ -1,8 +1,9 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
-import { ArrowUpRight, Mail, Github, Linkedin, Menu, X, Server, Cpu, Activity } from "lucide-react";
+import { ArrowUpRight, Mail, Github, Linkedin, Menu, X, Server } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Portfolio() {
   const [time, setTime] = React.useState<Date | null>(null);
@@ -505,7 +506,7 @@ export default function Portfolio() {
                         <animateMotion dur="3s" repeatCount="indefinite" path="M 200 200 L 60 60" rotate="auto" begin="0.6s" />
                       </rect>
 
-                      {/* <rect width="8" height="8" x="-4" y="-4" fill="#a78bfa" className="animate-shimmer">
+                      <rect width="8" height="8" x="-4" y="-4" fill="#a78bfa" className="animate-shimmer">
                         <animateMotion dur="2.5s" repeatCount="indefinite" path="M 200 200 L 340 60" rotate="auto" begin="0s" />
                       </rect>
                       <rect width="8" height="8" x="-4" y="-4" fill="#a78bfa" className="animate-shimmer" opacity="0.4">
@@ -523,7 +524,7 @@ export default function Portfolio() {
                       </rect>
                       <rect width="8" height="8" x="-4" y="-4" fill="#34d399" className="animate-shimmer" opacity="0.2">
                         <animateMotion dur="4s" repeatCount="indefinite" path="M 200 200 L 200 360" rotate="auto" begin="0.8s" />
-                      </rect> */}
+                      </rect>
                     </svg>
                   </div>
 
@@ -540,7 +541,7 @@ export default function Portfolio() {
                     {/* SplitEase Node */}
                     <div className="absolute top-[15%] left-[15%] pointer-events-auto group -translate-x-1/2 -translate-y-1/2">
                       <div className="w-16 h-16 bg-black/60 backdrop-blur-xl rounded-2xl border border-white/10 flex items-center justify-center hover:border-blue-400/50 transition-colors duration-500 shadow-xl">
-                        <img src="/splitease.svg" alt="SplitEase" className="w-10 h-10 object-contain" />
+                        <Image src="/splitease.svg" alt="SplitEase" width={40} height={40} className="object-contain" />
                       </div>
                       <div className="absolute left-full ml-3 top-1/2 -translate-y-1/2 text-[14px] font-mono whitespace-nowrap">
                         <span className="text-gray-500 block uppercase tracking-tighter text-[12px]">App</span>
@@ -551,7 +552,7 @@ export default function Portfolio() {
                     {/* n8n Node */}
                     <div className="absolute top-[15%] right-[15%] pointer-events-auto group translate-x-1/2 -translate-y-1/2">
                       <div className="w-16 h-16 bg-black/60 backdrop-blur-xl rounded-2xl border border-white/10 flex items-center justify-center hover:border-red-400/50 transition-colors duration-500 shadow-xl">
-                        <img src="/n8n-color.png" alt="n8n" className="w-10 h-10 object-contain" />
+                        <Image src="/n8n-color.png" alt="n8n" width={40} height={40} className="object-contain" />
                       </div>
                       <div className="absolute right-full mr-3 top-1/2 -translate-y-1/2 text-right text-[14px] font-mono whitespace-nowrap">
                         <span className="text-gray-500 block uppercase tracking-tighter text-[12px]">Automation</span>
@@ -562,7 +563,7 @@ export default function Portfolio() {
                     {/* Supabase Node */}
                     <div className="absolute top-[90%] left-[50%] pointer-events-auto group -translate-x-1/2 -translate-y-1/2">
                       <div className="w-16 h-16 bg-black/60 backdrop-blur-xl rounded-2xl border border-white/10 flex items-center justify-center hover:border-green-400/50 transition-colors duration-500 shadow-xl">
-                        <img src="/supabase-logo.svg" alt="Supabase" className="w-10 h-10 object-contain" />
+                        <Image src="/supabase-logo.svg" alt="Supabase" width={40} height={40} className="object-contain" />
                       </div>
                       <div className="absolute left-full ml-3 top-1/2 -translate-y-1/2 text-[14px] font-mono whitespace-nowrap">
                         <span className="text-gray-500 block uppercase tracking-tighter text-[12px]">Backend as a Service</span>
