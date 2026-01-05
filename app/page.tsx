@@ -179,52 +179,7 @@ export default function Portfolio() {
         "Supabase",
         "Vercel",
       ],
-    },
-    // {
-    //   project: "Data Analytics Pipeline",
-    //   client: "FinanceFlow Inc.",
-    //   period: "2022 - 2023",
-    //   type: "4 months",
-    //   description:
-    //     "Developed automated data processing pipeline for financial analytics, handling millions of transactions daily.",
-    //   deliverables: [
-    //     "ETL pipeline processing 5M+ records daily",
-    //     "Real-time dashboard with custom visualizations",
-    //     "Automated reporting system with email notifications",
-    //     "Data validation and error handling mechanisms",
-    //   ],
-    //   tech: ["Python", "Apache Airflow", "PostgreSQL", "Docker"],
-    // },
-    // {
-    //   project: "Mobile App Backend",
-    //   client: "HealthTech Startup",
-    //   period: "2021 - 2022",
-    //   type: "8 months",
-    //   description:
-    //     "Created backend infrastructure for healthcare mobile app with patient data management and appointment scheduling.",
-    //   deliverables: [
-    //     "HIPAA-compliant API with secure authentication",
-    //     "Appointment scheduling system with calendar integration",
-    //     "Push notification service for reminders",
-    //     "Patient data encryption and secure storage",
-    //   ],
-    //   tech: ["Go", "MongoDB", "AWS", "Firebase"],
-    // },
-    // {
-    //   project: "DevOps Automation",
-    //   client: "Multiple Clients",
-    //   period: "2020 - Present",
-    //   type: "Ongoing",
-    //   description:
-    //     "Providing DevOps consulting and automation solutions for various startups and small businesses.",
-    //   deliverables: [
-    //     "CI/CD pipeline setup and optimization",
-    //     "Infrastructure as Code using Terraform",
-    //     "Monitoring and alerting system implementation",
-    //     "Cost optimization and security audits",
-    //   ],
-    //   tech: ["Docker", "Kubernetes", "Terraform", "AWS"],
-    // },
+    }
   ];
 
   return (
@@ -327,15 +282,6 @@ export default function Portfolio() {
           <section className="min-h-[85vh] md:min-h-[90vh] flex flex-col justify-center relative z-10 pt-20 md:pt-0">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
               <div className="lg:col-span-12 xl:col-span-8 flex flex-col items-center text-center lg:items-start lg:text-left">
-                {/* <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 mb-8 animate-fade-in">
-                  <span className="relative flex h-2 w-2">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
-                  </span>
-                  <span className="text-[10px] md:text-xs font-mono text-gray-400 uppercase tracking-wider">
-                    Available for new opportunities
-                  </span>
-                </div> */}
                 <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-heading font-bold leading-[1.1] md:leading-[0.9] mb-6 md:mb-8 text-gradient">
                   Crafting software
                   <br className="hidden md:block" />
@@ -506,7 +452,7 @@ export default function Portfolio() {
                         <animateMotion dur="3s" repeatCount="indefinite" path="M 200 200 L 60 60" rotate="auto" begin="0.6s" />
                       </rect>
 
-                      <rect width="8" height="8" x="-4" y="-4" fill="#a78bfa" className="animate-shimmer">
+                      {/*} <rect width="8" height="8" x="-4" y="-4" fill="#a78bfa" className="animate-shimmer">
                         <animateMotion dur="2.5s" repeatCount="indefinite" path="M 200 200 L 340 60" rotate="auto" begin="0s" />
                       </rect>
                       <rect width="8" height="8" x="-4" y="-4" fill="#a78bfa" className="animate-shimmer" opacity="0.4">
@@ -524,7 +470,7 @@ export default function Portfolio() {
                       </rect>
                       <rect width="8" height="8" x="-4" y="-4" fill="#34d399" className="animate-shimmer" opacity="0.2">
                         <animateMotion dur="4s" repeatCount="indefinite" path="M 200 200 L 200 360" rotate="auto" begin="0.8s" />
-                      </rect>
+                      </rect>*/}
                     </svg>
                   </div>
 
@@ -766,9 +712,6 @@ export default function Portfolio() {
       < footer className="border-t border-white/5 py-12 relative z-10" >
         <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6 text-sm text-gray-500 font-mono">
           <div>© 2025 HARISH BARATHI S</div>
-          <div className="flex gap-8">
-            <a href="https://github.com/HarishbarathiS/TakeYouOnline" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">SOURCE CODE</a>
-          </div>
         </div>
       </footer >
     </div >
