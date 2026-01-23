@@ -6,17 +6,27 @@ import Link from "next/link";
 import Image from "next/image";
 
 export default function Portfolio() {
-  const [time, setTime] = React.useState<Date | null>(null);
+  const [time, setTime] = React.useState<string>('00:00');
   const eyesRef = useRef<HTMLDivElement>(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
 
   useEffect(() => {
+    // Function to format time
+    const formatTime = () => {
+      return new Date().toLocaleTimeString('en-US', {
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false,
+        timeZone: 'Asia/Kolkata'
+      });
+    };
+
     // Set initial time on client
-    setTime(new Date());
+    setTime(formatTime());
 
     // Update time every second
     const timer = setInterval(() => {
-      setTime(new Date());
+      setTime(formatTime());
     }, 1000);
 
     const handleMouseMove = (e: MouseEvent) => {
@@ -236,7 +246,7 @@ export default function Portfolio() {
               <div className="flex justify-between items-center">
                 <span className="text-[10px] text-gray-500 uppercase tracking-widest">Local Time</span>
                 <span className="text-xs font-mono text-white">
-                  {time ? time.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'Asia/Kolkata' }) : '00:00:00'}
+                  {time}
                 </span>
               </div>
               <div className="flex justify-between items-center">
@@ -259,7 +269,7 @@ export default function Portfolio() {
         <div className="flex flex-col items-end">
           <span className="hidden md:block text-[10px] text-gray-400 font-mono uppercase tracking-widest">Local Time</span>
           <span className="text-xs font-mono text-white">
-            {time ? time.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'Asia/Kolkata' }) : '00:00:00'}
+            {time}
           </span>
         </div>
         <div className="h-8 w-[1px] bg-white/10 mx-1"></div>

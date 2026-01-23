@@ -5,15 +5,8 @@ import {
   ArrowLeft,
   Server,
   Cpu,
-  ArrowUpRight,
   Menu,
   X,
-  Beaker,
-  Rocket,
-  Code2,
-  Zap,
-  GitBranch,
-  Terminal,
   Mail,
   Github,
   Linkedin,
@@ -22,13 +15,22 @@ import Link from "next/link";
 import Image from "next/image";
 
 export default function HomeLab() {
-  const [time, setTime] = useState<Date | null>(null);
+  const [time, setTime] = useState<string>('00:00');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
-    setTime(new Date());
+    const formatTime = () => {
+      return new Date().toLocaleTimeString("en-US", {
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: false,
+        timeZone: "Asia/Kolkata",
+      });
+    };
+
+    setTime(formatTime());
     const timer = setInterval(() => {
-      setTime(new Date());
+      setTime(formatTime());
     }, 1000);
     return () => clearInterval(timer);
   }, []);
@@ -198,14 +200,7 @@ export default function HomeLab() {
             Local Time
           </span>
           <span className="text-xs font-mono text-white">
-            {time
-              ? time.toLocaleTimeString("en-US", {
-                  hour: "2-digit",
-                  minute: "2-digit",
-                  hour12: false,
-                  timeZone: "Asia/Kolkata",
-                })
-              : "00:00:00"}
+            {time}
           </span>
         </div>
         <div className="h-8 w-[1px] bg-white/10 mx-1"></div>
@@ -259,11 +254,10 @@ export default function HomeLab() {
                   </div>
                   <div className="flex flex-col items-end">
                     <span
-                      className={`text-[10px] px-2 py-0.5 rounded-full font-mono uppercase tracking-widest border ${
-                        service.status === "Coming Soon"
-                          ? "bg-amber-500/10 text-amber-400 border-amber-500/20"
-                          : "bg-green-500/10 text-green-400 border-green-500/20"
-                      }`}
+                      className={`text-[10px] px-2 py-0.5 rounded-full font-mono uppercase tracking-widest border ${service.status === "Coming Soon"
+                        ? "bg-amber-500/10 text-amber-400 border-amber-500/20"
+                        : "bg-green-500/10 text-green-400 border-green-500/20"
+                        }`}
                     >
                       {service.status}
                     </span>
