@@ -1,9 +1,10 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
-import { ArrowUpRight, Mail, Github, Linkedin, Menu, X, Server } from "lucide-react";
+import { ArrowUpRight, Mail, Github, Linkedin, Menu, X, Server, Package, Box, BookOpen } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
+import GithubHeatmap from "@/components/GithubHeatmap";
 
 export default function Portfolio() {
   const [time, setTime] = React.useState<string>('00:00');
@@ -70,6 +71,7 @@ export default function Portfolio() {
   const projects = [
     {
       title: "SplitEase",
+      category: "Product",
       year: "2025",
       description:
         "A room-based expense sharing platform with real-time collaboration through invite links, allowing users to join rooms, view summaries, and resolve shared costs transparently.",
@@ -85,6 +87,7 @@ export default function Portfolio() {
     },
     {
       title: "Infosphere",
+      category: "Product",
       year: "2025",
       description:
         "An end-to-end task management platform for streamlined project workflow approvals. Developed a dynamic workflow system where project managers create tasks that pass through multiple review and correction stages, with automatic routing based on task status. Integrated versioned file uploads, access control, and a clean UI for team collaboration, ensuring transparent task histories and improved turnaround efficiency.",
@@ -100,6 +103,7 @@ export default function Portfolio() {
     },
     {
       title: "Dit",
+      category: "Python Package",
       year: "2024",
       description:
         "🏆 3rd Place Winner at Hackathon - A command-line tool for MySQL database version control. Track modifications in database schema and data, similar to Git for Databases. Features include change tracking (git diff) for database schema and data modifications, and a Flask-based Web Interface for intuitive table relationship visualization.",
@@ -110,9 +114,10 @@ export default function Portfolio() {
 
     {
       title: "SyncWithMates",
+      category: "Learning Project",
       year: "2024",
       description:
-        "An interactive watch party platform to stream and interact with friends.",
+        "An interactive watch party platform built to learn WebRTC, allowing users to stream and interact with friends in real-time.",
       tech: [
         "React",
         "Next.js",
@@ -178,6 +183,8 @@ export default function Portfolio() {
         "Task assignment and tracking",
         "Project management",
         "Task prioritization",
+        "Task status tracking",
+        "Task completion tracking",
         "Task status tracking",
         "Task completion tracking",
       ],
@@ -292,18 +299,31 @@ export default function Portfolio() {
           <section className="min-h-[85vh] md:min-h-[90vh] flex flex-col justify-center relative z-10 pt-20 md:pt-0">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
               <div className="lg:col-span-12 xl:col-span-8 flex flex-col items-center text-center lg:items-start lg:text-left">
-                <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-heading font-bold leading-[1.1] md:leading-[0.9] mb-6 md:mb-8 text-gradient">
-                  Crafting software
-                  <br className="hidden md:block" />
-                  <span className="md:hidden"> </span>
-                  that solves{" "}
-                  <span className="italic font-light text-white/60">
-                    real problems
-                  </span>
-                </h1>
+                <div className="relative mb-8">
+                  <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-heading font-black tracking-tighter leading-[0.8] text-white mb-6 uppercase">
+                    Engineering
+                    <br />
+                    Depth
+                  </h1>
+
+                  <div className="flex items-center gap-4 mb-6">
+                    <div className="h-[1px] w-12 bg-white/10"></div>
+                    <span className="text-[10px] font-mono uppercase tracking-[0.4em] text-blue-400/60 font-medium">
+                      Meets
+                    </span>
+                    <div className="h-[1px] w-12 bg-white/10"></div>
+                  </div>
+
+                  <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-bold italic leading-none">
+                    <span className="text-gradient-purple drop-shadow-[0_0_20px_rgba(99,102,241,0.2)] pr-4">
+                      Execution and Vision
+                    </span>
+                  </h1>
+                </div>
                 <p className="text-gray-400 text-base md:text-xl leading-relaxed max-w-xl md:max-w-2xl font-light mb-8 md:mb-0">
-                  A software engineer passionate about building scalable systems,
-                  elegant architectures, and products that make a meaningful difference.
+                  I engineer <span className="text-white">scalable systems</span> with a
+                  <span className="text-white"> builder’s mindset</span>, turning ideas into products
+                  that feel intuitive, practical, and meaningful to use.
                 </p>
                 <div className="mt-8 md:mt-10 flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
                   <a href="#work" className="px-8 py-4 bg-white text-black rounded-full font-medium text-sm hover:bg-gray-200 transition-all flex items-center justify-center gap-2 group w-full sm:w-auto">
@@ -344,193 +364,6 @@ export default function Portfolio() {
                       </div>
                     </div>
                   </div>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          {/* Work Section */}
-          <section id="work" className="py-16 md:py-32 border-t border-white/5 relative z-10 scroll-mt-24">
-            <div className="mb-12 md:mb-16">
-              <h2 className="text-3xl md:text-5xl font-heading font-bold mb-4">Selected Work</h2>
-              <p className="text-gray-500 font-mono text-xs uppercase tracking-widest">
-                / Systems and applications I&apos;ve built
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {projects.map((project, index) => (
-                <a
-                  key={index}
-                  href={project.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group block"
-                >
-                  <div className="h-full glass-dark rounded-3xl p-6 md:p-8 border border-white/5 hover:border-white/20 transition-all duration-500 hover:-translate-y-2 flex flex-col">
-                    <div className="flex justify-between items-start mb-6">
-                      <div className="flex flex-wrap gap-2">
-                        {project.tech.slice(0, 3).map((tech, techIndex) => (
-                          <span
-                            key={techIndex}
-                            className="text-[10px] px-3 py-1 bg-white/5 text-gray-400 rounded-full font-mono uppercase tracking-wider"
-                          >
-                            {tech}
-                          </span>
-                        ))}
-                      </div>
-                      <span className="text-gray-600 font-mono text-xs">{project.year}</span>
-                    </div>
-
-                    <h3 className="text-2xl font-heading font-bold mb-4 group-hover:text-blue-400 transition-colors">
-                      {project.title}
-                    </h3>
-
-                    {project.achievement && (
-                      <div className="inline-flex items-center gap-2 px-3 py-1 bg-yellow-500/10 text-yellow-500 rounded-full border border-yellow-500/20 text-[10px] font-mono uppercase tracking-wider mb-4 w-fit">
-                        🏆 {project.achievement}
-                      </div>
-                    )}
-
-                    <p className="text-gray-400 text-sm leading-relaxed mb-8 flex-grow">
-                      {project.description}
-                    </p>
-
-                    <div className="flex items-center gap-2 text-xs font-mono text-white group-hover:gap-4 transition-all">
-                      VIEW PROJECT
-                      <ArrowUpRight className="w-4 h-4" />
-                    </div>
-                  </div>
-                </a>
-              ))}
-            </div>
-          </section>
-
-          {/* Lab Section Preview */}
-          <section id="lab" className="py-10 md:py-22 border-t border-white/5 relative z-10 scroll-mt-24">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center">
-              <div>
-                <div className="mb-8">
-                  <h2 className="text-3xl md:text-5xl font-heading font-bold mb-4">Home Lab</h2>
-                  <p className="text-gray-500 font-mono text-xs uppercase tracking-widest">/ Private infrastructure and experiments</p>
-                </div>
-
-                <div className="space-y-6 text-gray-400 leading-relaxed font-light mb-10">
-                  <p className="text-xl text-white">
-                    Exploring the world of <span className="text-blue-400">self-hosting</span> and
-                    <span className="text-purple-400"> high-performance computing</span>.
-                  </p>
-                  <p>
-                    I host my own cloud infrastructure to maintain full control over my data and
-                    experiment with production-grade architectures in a localized environment.
-                  </p>
-                </div>
-
-                <Link
-                  href="/lab"
-                  className="inline-flex items-center gap-3 px-8 py-4 bg-white text-black rounded-full hover:bg-gray-200 transition-all font-medium group"
-                >
-                  Explore Home Lab
-                  <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                </Link>
-              </div>
-
-              <div className="flex items-center justify-center relative scale-90 md:scale-100">
-                <div className="absolute inset-0 network-grid opacity-20 z-0"></div>
-                <div className="relative w-full aspect-square max-w-md flex items-center justify-center">
-
-                  {/* Central SVG Layer for Connections */}
-                  <div className="absolute inset-0 z-10 pointer-events-none">
-                    <svg viewBox="0 0 400 400" className="w-full h-full overflow-visible">
-
-                      {/* Lines from Center (200, 200) to Nodes */}
-                      {/* SplitEase (60, 60) */}
-                      <path d="M 200 200 L 60 60" stroke="#3b82f6" strokeWidth="2" strokeDasharray="6 6" className="animate-shimmer" strokeOpacity="0.4" />
-                      {/* n8n (340, 60) */}
-                      <path d="M 200 200 L 340 60" stroke="#a78bfa" strokeWidth="2" strokeDasharray="6 6" className="animate-shimmer" strokeOpacity="0.4" />
-                      {/* Supabase (200, 360) */}
-                      <path d="M 200 200 L 200 360" stroke="#34d399" strokeWidth="2" strokeDasharray="6 6" className="animate-shimmer" strokeOpacity="0.4" />
-
-                      {/* Moving Data Packets */}
-                      <rect width="8" height="8" x="-4" y="-4" fill="#60a5fa" className="animate-shimmer">
-                        <animateMotion dur="3s" repeatCount="indefinite" path="M 200 200 L 60 60" rotate="auto" begin="0s" />
-                      </rect>
-                      <rect width="8" height="8" x="-4" y="-4" fill="#60a5fa" className="animate-shimmer" opacity="0.4">
-                        <animateMotion dur="3s" repeatCount="indefinite" path="M 200 200 L 60 60" rotate="auto" begin="0.3s" />
-                      </rect>
-                      <rect width="8" height="8" x="-4" y="-4" fill="#60a5fa" className="animate-shimmer" opacity="0.2">
-                        <animateMotion dur="3s" repeatCount="indefinite" path="M 200 200 L 60 60" rotate="auto" begin="0.6s" />
-                      </rect>
-
-                      {/*} <rect width="8" height="8" x="-4" y="-4" fill="#a78bfa" className="animate-shimmer">
-                        <animateMotion dur="2.5s" repeatCount="indefinite" path="M 200 200 L 340 60" rotate="auto" begin="0s" />
-                      </rect>
-                      <rect width="8" height="8" x="-4" y="-4" fill="#a78bfa" className="animate-shimmer" opacity="0.4">
-                        <animateMotion dur="2.5s" repeatCount="indefinite" path="M 200 200 L 340 60" rotate="auto" begin="0.2s" />
-                      </rect>
-                      <rect width="8" height="8" x="-4" y="-4" fill="#a78bfa" className="animate-shimmer" opacity="0.2">
-                        <animateMotion dur="2.5s" repeatCount="indefinite" path="M 200 200 L 340 60" rotate="auto" begin="0.4s" />
-                      </rect>
-
-                      <rect width="8" height="8" x="-4" y="-4" fill="#34d399" className="animate-shimmer">
-                        <animateMotion dur="4s" repeatCount="indefinite" path="M 200 200 L 200 360" rotate="auto" begin="0s" />
-                      </rect>
-                      <rect width="8" height="8" x="-4" y="-4" fill="#34d399" className="animate-shimmer" opacity="0.4">
-                        <animateMotion dur="4s" repeatCount="indefinite" path="M 200 200 L 200 360" rotate="auto" begin="0.4s" />
-                      </rect>
-                      <rect width="8" height="8" x="-4" y="-4" fill="#34d399" className="animate-shimmer" opacity="0.2">
-                        <animateMotion dur="4s" repeatCount="indefinite" path="M 200 200 L 200 360" rotate="auto" begin="0.8s" />
-                      </rect>*/}
-                    </svg>
-                  </div>
-
-                  {/* Central Node: The-Harish-Machine */}
-                  <div className="relative z-20">
-                    <div className="w-32 h-32 bg-blue-500/10 backdrop-blur-3xl rounded-3xl border border-blue-500/30 flex flex-col items-center justify-center group hover:border-blue-500/50 transition-all duration-500">
-                      <Server size={48} className="text-blue-400 group-hover:scale-110 transition-transform duration-500" />
-                      <span className="text-[8px] font-mono mt-2 text-blue-300 uppercase opacity-60">Master Node</span>
-                    </div>
-                  </div>
-
-                  {/* Orbiting Service Nodes */}
-                  <div className="absolute inset-0 z-20 pointer-events-none">
-                    {/* SplitEase Node */}
-                    <div className="absolute top-[15%] left-[15%] pointer-events-auto group -translate-x-1/2 -translate-y-1/2">
-                      <div className="w-16 h-16 bg-black/60 backdrop-blur-xl rounded-2xl border border-white/10 flex items-center justify-center hover:border-blue-400/50 transition-colors duration-500 shadow-xl">
-                        <Image src="/splitease.svg" alt="SplitEase" width={40} height={40} className="object-contain" />
-                      </div>
-                      <div className="absolute left-full ml-3 top-1/2 -translate-y-1/2 text-[14px] font-mono whitespace-nowrap">
-                        <span className="text-gray-500 block uppercase tracking-tighter text-[12px]">App</span>
-                        <span className="text-blue-400 font-bold">SplitEase</span>
-                      </div>
-                    </div>
-
-                    {/* n8n Node */}
-                    <div className="absolute top-[15%] right-[15%] pointer-events-auto group translate-x-1/2 -translate-y-1/2">
-                      <div className="w-16 h-16 bg-black/60 backdrop-blur-xl rounded-2xl border border-white/10 flex items-center justify-center hover:border-red-400/50 transition-colors duration-500 shadow-xl">
-                        <Image src="/n8n-color.png" alt="n8n" width={40} height={40} className="object-contain" />
-                      </div>
-                      <div className="absolute right-full mr-3 top-1/2 -translate-y-1/2 text-right text-[14px] font-mono whitespace-nowrap">
-                        <span className="text-gray-500 block uppercase tracking-tighter text-[12px]">Automation</span>
-                        <span className="text-purple-400 font-bold">n8n</span>
-                      </div>
-                    </div>
-
-                    {/* Supabase Node */}
-                    <div className="absolute top-[90%] left-[50%] pointer-events-auto group -translate-x-1/2 -translate-y-1/2">
-                      <div className="w-16 h-16 bg-black/60 backdrop-blur-xl rounded-2xl border border-white/10 flex items-center justify-center hover:border-green-400/50 transition-colors duration-500 shadow-xl">
-                        <Image src="/supabase-logo.svg" alt="Supabase" width={40} height={40} className="object-contain" />
-                      </div>
-                      <div className="absolute left-full ml-3 top-1/2 -translate-y-1/2 text-[14px] font-mono whitespace-nowrap">
-                        <span className="text-gray-500 block uppercase tracking-tighter text-[12px]">Backend as a Service</span>
-                        <span className="text-green-400 font-bold">Supabase</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Ambient Decorative Orbit */}
-                  <div className="absolute w-[85%] h-[85%] rounded-full border border-white/5 animate-rotate-slow opacity-20 pointer-events-none"></div>
-                  <div className="absolute w-[65%] h-[65%] rounded-full border border-white/5 animate-rotate-slow-reverse opacity-10 pointer-events-none"></div>
                 </div>
               </div>
             </div>
@@ -614,6 +447,189 @@ export default function Portfolio() {
             </div>
           </section>
 
+          {/* Solutions Section */}
+          <section id="work" className="py-16 md:py-32 border-t border-white/5 relative z-10 scroll-mt-24">
+            <div className="mb-12 md:mb-16">
+              <h2 className="text-3xl md:text-5xl font-heading font-bold mb-4">Solutions</h2>
+              <p className="text-gray-500 font-mono text-xs uppercase tracking-widest">
+                / Systems and applications I&apos;ve built
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {projects.map((project, index) => (
+                <a
+                  key={index}
+                  href={project.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group block"
+                >
+                  <div className="h-full glass-dark rounded-3xl p-6 md:p-8 border border-white/5 hover:border-white/20 transition-all duration-500 hover:-translate-y-2 flex flex-col group/card">
+                    <div className="flex justify-between items-start mb-6">
+                      <div className="flex flex-wrap gap-2">
+                        {project.tech.slice(0, 3).map((tech, techIndex) => (
+                          <span
+                            key={techIndex}
+                            className="text-[10px] px-3 py-1 bg-white/5 text-gray-400 rounded-full font-mono uppercase tracking-wider"
+                          >
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+                      <span className="text-gray-600 font-mono text-xs">{project.year}</span>
+                    </div>
+
+                    <div className="mb-4">
+                      <div className="flex items-center gap-2 mb-2">
+                        <div className="p-1.5 rounded-lg bg-blue-500/10 border border-blue-500/20 text-blue-400 group-hover/card:scale-110 transition-transform duration-500">
+                          {project.category === "Product" && <Box size={14} className="animate-pulse" />}
+                          {project.category === "Python Package" && <Package size={14} className="animate-pulse" />}
+                          {project.category === "Learning Project" && <BookOpen size={14} className="animate-pulse" />}
+                        </div>
+                        <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-blue-400/80 font-bold">
+                          {project.category}
+                        </span>
+                      </div>
+                      <h3 className="text-2xl md:text-3xl font-heading font-bold group-hover/card:text-blue-400 transition-colors">
+                        {project.title}
+                      </h3>
+                    </div>
+
+                    {project.achievement && (
+                      <div className="inline-flex items-center gap-2 px-3 py-1 bg-yellow-500/10 text-yellow-500 rounded-full border border-yellow-500/20 text-[10px] font-mono uppercase tracking-wider mb-4 w-fit">
+                        🏆 {project.achievement}
+                      </div>
+                    )}
+
+                    <p className="text-gray-400 text-sm leading-relaxed mb-8 flex-grow">
+                      {project.description}
+                    </p>
+
+                    <div className="flex items-center gap-2 text-xs font-mono text-white group-hover:gap-4 transition-all">
+                      VIEW PROJECT
+                      <ArrowUpRight className="w-4 h-4" />
+                    </div>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </section>
+
+          {/* Lab Section Preview */}
+          <section id="lab" className="py-16 md:py-32 border-t border-white/5 relative z-10 scroll-mt-24">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center">
+              <div>
+                <div className="mb-8">
+                  <h2 className="text-3xl md:text-5xl font-heading font-bold mb-4">Home Lab</h2>
+                  <p className="text-gray-500 font-mono text-xs uppercase tracking-widest">/ Private infrastructure and experiments</p>
+                </div>
+
+                <div className="space-y-6 text-gray-400 leading-relaxed font-light mb-10">
+                  <p className="text-xl text-white">
+                    Exploring the world of <span className="text-blue-400">self-hosting</span>.
+                  </p>
+                  <p>
+                    I host my own cloud infrastructure to maintain full control over my data and
+                    experiment with production-grade architectures.
+                  </p>
+                </div>
+
+                <Link
+                  href="/lab"
+                  className="inline-flex items-center gap-3 px-8 py-4 bg-white text-black rounded-full hover:bg-gray-200 transition-all font-medium group"
+                >
+                  Explore Home Lab
+                  <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                </Link>
+              </div>
+
+              <div className="flex items-center justify-center relative scale-90 md:scale-100">
+                <div className="absolute inset-0 network-grid opacity-20 z-0"></div>
+                <div className="relative w-full aspect-square max-w-md flex items-center justify-center">
+
+                  {/* Central SVG Layer for Connections */}
+                  <div className="absolute inset-0 z-10 pointer-events-none">
+                    <svg viewBox="0 0 400 400" className="w-full h-full overflow-visible">
+
+                      {/* Lines from Center (200, 200) to Nodes */}
+                      {/* SplitEase (60, 60) */}
+                      <path d="M 200 200 L 60 60" stroke="#3b82f6" strokeWidth="2" strokeDasharray="6 6" className="animate-shimmer" strokeOpacity="0.4" />
+                      {/* n8n (340, 60) */}
+                      <path d="M 200 200 L 340 60" stroke="#a78bfa" strokeWidth="2" strokeDasharray="6 6" className="animate-shimmer" strokeOpacity="0.4" />
+                      {/* Supabase (200, 360) */}
+                      <path d="M 200 200 L 200 360" stroke="#34d399" strokeWidth="2" strokeDasharray="6 6" className="animate-shimmer" strokeOpacity="0.4" />
+
+                      {/* Moving Data Packets */}
+                      <rect width="8" height="8" x="-4" y="-4" fill="#60a5fa" className="animate-shimmer">
+                        <animateMotion dur="3s" repeatCount="indefinite" path="M 200 200 L 60 60" rotate="auto" begin="0s" />
+                      </rect>
+                      <rect width="8" height="8" x="-4" y="-4" fill="#60a5fa" className="animate-shimmer" opacity="0.4">
+                        <animateMotion dur="3s" repeatCount="indefinite" path="M 200 200 L 60 60" rotate="auto" begin="0.3s" />
+                      </rect>
+                      <rect width="8" height="8" x="-4" y="-4" fill="#60a5fa" className="animate-shimmer" opacity="0.2">
+                        <animateMotion dur="3s" repeatCount="indefinite" path="M 200 200 L 60 60" rotate="auto" begin="0.6s" />
+                      </rect>
+                    </svg>
+                  </div>
+
+                  {/* Central Node: The-Harish-Machine */}
+                  <div className="relative z-20">
+                    <div className="w-32 h-32 bg-blue-500/10 backdrop-blur-3xl rounded-3xl border border-blue-500/30 flex flex-col items-center justify-center group hover:border-blue-500/50 transition-all duration-500">
+                      <Server size={48} className="text-blue-400 group-hover:scale-110 transition-transform duration-500" />
+                      <span className="text-[8px] font-mono mt-2 text-blue-300 uppercase opacity-60">Master Node</span>
+                    </div>
+                  </div>
+
+                  {/* Orbiting Service Nodes */}
+                  <div className="absolute inset-0 z-20 pointer-events-none">
+                    {/* SplitEase Node */}
+                    <div className="absolute top-[15%] left-[15%] pointer-events-auto group -translate-x-1/2 -translate-y-1/2">
+                      <div className="w-16 h-16 bg-black/60 backdrop-blur-xl rounded-2xl border border-white/10 flex items-center justify-center hover:border-blue-400/50 transition-colors duration-500 shadow-xl">
+                        <Image src="/splitease.svg" alt="SplitEase" width={40} height={40} className="object-contain" />
+                      </div>
+                      <div className="absolute left-full ml-3 top-1/2 -translate-y-1/2 text-[14px] font-mono whitespace-nowrap">
+                        <span className="text-gray-500 block uppercase tracking-tighter text-[12px]">App</span>
+                        <span className="text-blue-400 font-bold">SplitEase</span>
+                      </div>
+                    </div>
+
+                    {/* n8n Node */}
+                    <div className="absolute top-[15%] right-[15%] pointer-events-auto group translate-x-1/2 -translate-y-1/2">
+                      <div className="w-16 h-16 bg-black/60 backdrop-blur-xl rounded-2xl border border-white/10 flex items-center justify-center hover:border-red-400/50 transition-colors duration-500 shadow-xl">
+                        <Image src="/n8n-color.png" alt="n8n" width={40} height={40} className="object-contain" />
+                      </div>
+                      <div className="absolute right-full mr-3 top-1/2 -translate-y-1/2 text-right text-[14px] font-mono whitespace-nowrap">
+                        <span className="text-gray-500 block uppercase tracking-tighter text-[12px]">Automation</span>
+                        <span className="text-purple-400 font-bold">n8n</span>
+                      </div>
+                    </div>
+
+                    {/* Supabase Node */}
+                    <div className="absolute top-[90%] left-[50%] pointer-events-auto group -translate-x-1/2 -translate-y-1/2">
+                      <div className="w-16 h-16 bg-black/60 backdrop-blur-xl rounded-2xl border border-white/10 flex items-center justify-center hover:border-green-400/50 transition-colors duration-500 shadow-xl">
+                        <Image src="/supabase-logo.svg" alt="Supabase" width={40} height={40} className="object-contain" />
+                      </div>
+                      <div className="absolute left-full ml-3 top-1/2 -translate-y-1/2 text-[14px] font-mono whitespace-nowrap">
+                        <span className="text-gray-500 block uppercase tracking-tighter text-[12px]">Backend as a Service</span>
+                        <span className="text-green-400 font-bold">Supabase</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Ambient Decorative Orbit */}
+                  <div className="absolute w-[85%] h-[85%] rounded-full border border-white/5 animate-rotate-slow opacity-20 pointer-events-none"></div>
+                  <div className="absolute w-[65%] h-[65%] rounded-full border border-white/5 animate-rotate-slow-reverse opacity-10 pointer-events-none"></div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* GitHub Activity Section */}
+          <section className="py-16 md:py-24 border-t border-white/5 relative z-10">
+            <GithubHeatmap />
+          </section>
+
           {/* About & Technologies Section */}
           <section id="about" className="py-16 md:py-32 border-t border-white/5 relative z-10 scroll-mt-24">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24">
@@ -633,11 +649,6 @@ export default function Portfolio() {
                     patient care plans.
                   </p>
 
-                  <p>
-                    I thrive in the intersection of <span className="text-white">clean code</span> and
-                    <span className="text-white"> scalable architecture</span>. My goal is always to
-                    deliver products that are not just functional, but exceptional.
-                  </p>
                 </div>
               </div>
 

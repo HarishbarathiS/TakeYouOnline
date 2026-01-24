@@ -141,6 +141,10 @@
     @apply bg-clip-text text-transparent bg-gradient-to-br from-white via-white to-white/40;
   }
 
+  .text-gradient-purple {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-indigo-500 to-purple-600;
+  }
+
   .noise {
     position: relative;
   }
