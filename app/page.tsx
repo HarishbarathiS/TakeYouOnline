@@ -70,11 +70,11 @@ export default function Portfolio() {
 
   const projects = [
     {
-      title: "SplitEase",
+      title: "SplitOne",
       category: "Product",
       year: "2025",
       description:
-        "A room-based expense sharing platform with real-time collaboration through invite links, allowing users to join rooms, view summaries, and resolve shared costs transparently.",
+        "An expense splitting app designed to provide an intuitive and smooth experience. Features include simple onboarding, clear navigation, ability to scan and upload bills, item-wise splitting, and Pay with UPI.",
       tech: [
         "Next.js",
         "Supabase",
