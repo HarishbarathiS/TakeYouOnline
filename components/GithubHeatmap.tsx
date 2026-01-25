@@ -11,8 +11,8 @@ const GithubHeatmap = () => {
             <div className="w-full max-w-5xl glass-dark p-6 md:p-10 rounded-[2rem] md:rounded-[3rem] border border-white/10 overflow-hidden">
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
                     <div>
-                        <h3 className="text-2xl font-heading font-bold mb-2">Code Contributions</h3>
-                        <p className="text-gray-400 text-sm font-light">My activity across GitHub repositories.</p>
+                        <h3 className="text-2xl font-heading font-bold mb-2">GitHub Code Contributions</h3>
+                        {/* <p className="text-gray-400 text-sm font-light">My activity across  repositories.</p> */}
                     </div>
                 </div>
 
