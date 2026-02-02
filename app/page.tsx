@@ -169,35 +169,7 @@ export default function Portfolio() {
     },
   ];
 
-  const freelanceWork = [
-    {
-      project: "Employee Task Management System",
-      client: "B2k",
-      period: "2025 - Present",
-      // type: "6 months",
-      description:
-        "Built a scalable task management system for the company to manage their tasks and projects.",
-      deliverables: [
-        "Task management system with real-time updates",
-        "User authentication and authorization",
-        "Task assignment and tracking",
-        "Project management",
-        "Task prioritization",
-        "Task status tracking",
-        "Task completion tracking",
-        "Task status tracking",
-        "Task completion tracking",
-      ],
-      tech: [
-        "React",
-        "Next.js",
-        "Tailwind CSS",
-        "TypeScript",
-        "Supabase",
-        "Vercel",
-      ],
-    }
-  ];
+
 
   return (
     <div className="min-h-screen bg-black text-white font-sans noise">
@@ -371,7 +343,7 @@ export default function Portfolio() {
 
           {/* Experience & Freelance Section */}
           <section id="experience" className="py-16 md:py-32 border-t border-white/5 relative z-10 scroll-mt-24">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24">
+            <div className="max-w-4xl">
               {/* Experience Column */}
               <div>
                 <div className="mb-12">
@@ -409,41 +381,7 @@ export default function Portfolio() {
                 </div>
               </div>
 
-              {/* Freelancing Column */}
-              <div>
-                <div className="mb-12">
-                  <h2 className="text-3xl font-heading font-bold mb-4">Freelance Projects</h2>
-                  <p className="text-gray-500 font-mono text-xs uppercase tracking-widest">/ Client work</p>
-                </div>
 
-                <div className="space-y-16">
-                  {freelanceWork.map((work, index) => (
-                    <div key={index} className="glass-dark rounded-3xl p-6 md:p-8 border border-white/5">
-                      <div className="text-gray-500 font-mono text-[10px] uppercase tracking-widest mb-2">{work.period}</div>
-                      <h4 className="text-xl font-heading font-bold mb-1">{work.project}</h4>
-                      <div className="text-purple-400 font-medium mb-4">{work.client}</div>
-                      <p className="text-gray-400 text-sm leading-relaxed mb-6">{work.description}</p>
-
-                      <div className="grid grid-cols-1 gap-2 mb-6">
-                        {work.deliverables.map((deliverable, delIndex) => (
-                          <div key={delIndex} className="text-xs text-gray-500 flex items-center leading-relaxed">
-                            <ArrowUpRight className="w-3 h-3 text-gray-700 mr-2" />
-                            {deliverable}
-                          </div>
-                        ))}
-                      </div>
-
-                      <div className="flex flex-wrap gap-2">
-                        {work.tech.map((tech, techIndex) => (
-                          <span key={techIndex} className="text-[10px] px-2 py-1 bg-purple-500/5 text-purple-400 rounded border border-purple-500/10 font-mono">
-                            {tech}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
             </div>
           </section>
 
