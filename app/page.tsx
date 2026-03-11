@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import { ArrowUpRight, Mail, Github, Linkedin, Menu, X, Server, Package, Box, BookOpen } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
@@ -8,8 +8,8 @@ import GithubHeatmap from "@/components/GithubHeatmap";
 
 export default function Portfolio() {
   const [time, setTime] = React.useState<string>('00:00');
-  const eyesRef = useRef<HTMLDivElement>(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
+  const [isArchitectureMode, setIsArchitectureMode] = React.useState(false);
 
   useEffect(() => {
     // Function to format time
@@ -30,40 +30,7 @@ export default function Portfolio() {
       setTime(formatTime());
     }, 1000);
 
-    const handleMouseMove = (e: MouseEvent) => {
-      if (eyesRef.current) {
-        const eyes = eyesRef.current.querySelectorAll(".eye");
-        eyes.forEach((eye) => {
-          const eyeRect = eye.getBoundingClientRect();
-          const eyeCenterX = eyeRect.left + eyeRect.width / 2;
-          const eyeCenterY = eyeRect.top + eyeRect.height / 2;
-
-          const angle = Math.atan2(
-            e.clientY - eyeCenterY,
-            e.clientX - eyeCenterX
-          );
-          const distance = Math.min(
-            8,
-            Math.sqrt(
-              Math.pow(e.clientX - eyeCenterX, 2) +
-              Math.pow(e.clientY - eyeCenterY, 2)
-            ) / 10
-          );
-
-          const pupilX = Math.cos(angle) * distance;
-          const pupilY = Math.sin(angle) * distance;
-
-          const pupil = eye.querySelector(".pupil") as HTMLElement;
-          if (pupil) {
-            pupil.style.transform = `translate(${pupilX}px, ${pupilY}px)`;
-          }
-        });
-      }
-    };
-
-    document.addEventListener("mousemove", handleMouseMove);
     return () => {
-      document.removeEventListener("mousemove", handleMouseMove);
       clearInterval(timer);
     };
   }, []);
@@ -75,6 +42,7 @@ export default function Portfolio() {
       year: "2025",
       description:
         "An expense splitting app designed to provide an intuitive and smooth experience. Features include simple onboarding, clear navigation, ability to scan and upload bills, item-wise splitting, and Pay with UPI.",
+      architecture: "Built on a serverless architecture using Next.js for both frontend and API routes. Supabase provides a managed PostgreSQL database and handles authentication. The app leverages OCR integration for bill scanning and real-time database subscriptions for instant updates on expense splits.",
       tech: [
         "Next.js",
         "Supabase",
@@ -91,6 +59,7 @@ export default function Portfolio() {
       year: "2025",
       description:
         "An end-to-end task management platform for streamlined project workflow approvals. Developed a dynamic workflow system where project managers create tasks that pass through multiple review and correction stages, with automatic routing based on task status. Integrated versioned file uploads, access control, and a clean UI for team collaboration, ensuring transparent task histories and improved turnaround efficiency.",
+      architecture: "Utilizes a state-machine based workflow engine. Next.js manages the application state and server-side rendering for optimal performance. Supabase acts as the backend-as-a-service, handling complex role-based access control (RBAC) and storing versioned file metadata, while actual files are secured in Supabase Storage.",
       tech: [
         "React",
         "Next.js",
@@ -107,6 +76,7 @@ export default function Portfolio() {
       year: "2024",
       description:
         "🏆 3rd Place Winner at Hackathon - A command-line tool for MySQL database version control. Track modifications in database schema and data, similar to Git for Databases. Features include change tracking (git diff) for database schema and data modifications, and a Flask-based Web Interface for intuitive table relationship visualization.",
+      architecture: "A Python CLI tool that interfaces directly with MySQL information_schema tables to detect drifts. It implements a local versioning commit system similar to Git's internal object database. A lightweight Flask server creates a local web interface for visualizing the database schema graph dynamically.",
       tech: ["Python", "Flask", "MySQL", "JavaScript", "TypeScript"],
       link: "https://github.com/HarishbarathiS/dit",
       achievement: "3rd Place - Hackathon Winner",
@@ -118,6 +88,7 @@ export default function Portfolio() {
       year: "2024",
       description:
         "An interactive watch party platform built to learn WebRTC, allowing users to stream and interact with friends in real-time.",
+      architecture: "Implements a peer-to-peer (P2P) architecture using WebRTC for low-latency video and audio streaming. A Next.js server acts as the signaling server to establish initial connections (SDP exchange). MongoDB persists user room sessions and chat history.",
       tech: [
         "React",
         "Next.js",
@@ -180,68 +151,56 @@ export default function Portfolio() {
         <div className="absolute -bottom-[10%] left-[20%] w-[30%] h-[30%] bg-indigo-500/10 blur-[120px] rounded-full"></div>
       </div>
 
-      {/* Header */}
-      <header className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-2rem)] md:w-[95%] max-w-5xl">
-        <div className="border-beam-container bg-black/40 backdrop-blur-xl rounded-full border border-white/10">
-          <div className="border-beam"></div>
-          <div className="px-6 py-3 relative z-10">
-            <div className="flex justify-between items-center">
-              <div className="text-sm font-heading font-semibold tracking-tight">
-                <span>Harish Barathi S</span>
-              </div>
-
-              <div className="flex items-center gap-4">
-                {/* Desktop Nav */}
-                <nav className="hidden md:flex items-center gap-6 text-xs font-mono text-gray-400">
-                  <a href="#work" className="hover:text-white transition-colors">WORK</a>
-                  <a href="#experience" className="hover:text-white transition-colors">EXP</a>
-                  <a href="/lab" className="hover:text-white transition-colors uppercase">Lab</a>
-                  <a href="#about" className="hover:text-white transition-colors">ABOUT</a>
-                </nav>
-
-                {/* Mobile Menu Button */}
-                <button
-                  className="md:hidden text-white p-1"
-                  onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                >
-                  {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
-                </button>
-              </div>
-            </div>
+      {/* Desktop Nav Pill - centered */}
+      <header className="fixed top-4 left-1/2 -translate-x-1/2 z-50 hidden md:block">
+        <div className="bg-black/40 backdrop-blur-xl rounded-full border border-white/10">
+          <div className="px-8 py-3">
+            <nav className="flex items-center gap-10 text-xs font-mono text-gray-400">
+              <a href="#work" className="hover:text-white transition-colors">WORK</a>
+              <a href="#experience" className="hover:text-white transition-colors">EXP</a>
+              <a href="/lab" className="hover:text-white transition-colors">LAB</a>
+              <a href="#about" className="hover:text-white transition-colors">ABOUT</a>
+            </nav>
           </div>
         </div>
+      </header>
 
-        {/* Mobile Menu Dropdown */}
-        {isMobileMenuOpen && (
-          <div className="absolute top-full left-0 w-full mt-2 p-4 glass-dark rounded-3xl border border-white/10 flex flex-col gap-4 md:hidden animate-in fade-in slide-in-from-top-5">
-            <nav className="flex flex-col gap-4 text-sm font-mono text-gray-400">
-              <a href="#work" className="hover:text-white transition-colors p-2" onClick={() => setIsMobileMenuOpen(false)}>WORK</a>
-              <a href="#experience" className="hover:text-white transition-colors p-2" onClick={() => setIsMobileMenuOpen(false)}>EXP</a>
-              <a href="/lab" className="hover:text-white transition-colors p-2 uppercase" onClick={() => setIsMobileMenuOpen(false)}>Lab</a>
-              <a href="#about" className="hover:text-white transition-colors p-2" onClick={() => setIsMobileMenuOpen(false)}>ABOUT</a>
-            </nav>
-            <div className="h-[1px] bg-white/10 w-full"></div>
-            <div className="flex flex-col gap-3 p-2">
-              <div className="flex justify-between items-center">
-                <span className="text-[10px] text-gray-500 uppercase tracking-widest">Local Time</span>
-                <span className="text-xs font-mono text-white">
-                  {time}
-                </span>
+      {/* Mobile Nav - left-side hamburger pill */}
+      <div className="fixed top-4 left-4 z-50 md:hidden">
+        <div className="relative">
+          <button
+            className="flex items-center justify-center w-10 h-10 bg-black/40 backdrop-blur-xl rounded-full border border-white/10 text-white"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          >
+            {isMobileMenuOpen ? <X size={18} /> : <Menu size={18} />}
+          </button>
+
+          {/* Mobile Dropdown */}
+          {isMobileMenuOpen && (
+            <div className="absolute top-full left-0 mt-2 w-44 p-2 bg-black/80 backdrop-blur-xl rounded-2xl border border-white/10 flex flex-col gap-1">
+              <a href="#work" className="text-sm font-mono text-gray-400 hover:text-white transition-colors px-3 py-2 rounded-xl hover:bg-white/5" onClick={() => setIsMobileMenuOpen(false)}>WORK</a>
+              <a href="#experience" className="text-sm font-mono text-gray-400 hover:text-white transition-colors px-3 py-2 rounded-xl hover:bg-white/5" onClick={() => setIsMobileMenuOpen(false)}>EXP</a>
+              <a href="/lab" className="text-sm font-mono text-gray-400 hover:text-white transition-colors px-3 py-2 rounded-xl hover:bg-white/5" onClick={() => setIsMobileMenuOpen(false)}>LAB</a>
+              <a href="#about" className="text-sm font-mono text-gray-400 hover:text-white transition-colors px-3 py-2 rounded-xl hover:bg-white/5" onClick={() => setIsMobileMenuOpen(false)}>ABOUT</a>
+              <div className="h-[1px] bg-white/10 mx-1 my-1"></div>
+              <div className="px-3 py-1 flex justify-between items-center">
+                <span className="text-[10px] text-gray-600 uppercase tracking-widest">Time</span>
+                <span className="text-[10px] font-mono text-gray-400">{time}</span>
               </div>
-              <div className="flex justify-between items-center">
-                <span className="text-[10px] text-gray-500 uppercase tracking-widest">Location</span>
-                <div className="flex items-center gap-2">
-                  <span className="text-xs font-mono text-white uppercase">Chennai, IN</span>
-                  <span className="relative flex h-2 w-2">
+              <div className="px-3 py-1 flex justify-between items-center">
+                <span className="text-[10px] text-gray-600 uppercase tracking-widest">Location</span>
+                <div className="flex items-center gap-1.5">
+                  <span className="text-[10px] font-mono text-gray-400">Chennai</span>
+                  <span className="relative flex h-1.5 w-1.5">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+                    <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-blue-500"></span>
                   </span>
                 </div>
               </div>
             </div>
-          </div>
-        )}
-      </header>
+          )}
+        </div>
+      </div>
 
       {/* External Location Marker (Desktop Only) */}
       <div className="fixed top-6 right-6 z-50 hidden md:flex items-center gap-3">
@@ -269,74 +228,22 @@ export default function Portfolio() {
         <div className="max-w-6xl mx-auto px-6">
           {/* Hero Section */}
           <section className="min-h-[85vh] md:min-h-[90vh] flex flex-col justify-center relative z-10 pt-20 md:pt-0">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-              <div className="lg:col-span-12 xl:col-span-8 flex flex-col items-center text-center lg:items-start lg:text-left">
-                <div className="relative mb-8">
-                  <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-heading font-black tracking-tighter leading-[0.8] text-white mb-6 uppercase">
-                    Engineering
-                    <br />
-                    Depth
-                  </h1>
-
-                  <div className="flex items-center gap-4 mb-6">
-                    <div className="h-[1px] w-12 bg-white/10"></div>
-                    <span className="text-[10px] font-mono uppercase tracking-[0.4em] text-blue-400/60 font-medium">
-                      Meets
-                    </span>
-                    <div className="h-[1px] w-12 bg-white/10"></div>
-                  </div>
-
-                  <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-bold italic leading-none">
-                    <span className="text-gradient-purple drop-shadow-[0_0_20px_rgba(99,102,241,0.2)] pr-4">
-                      Execution and Vision
-                    </span>
-                  </h1>
-                </div>
-                <p className="text-gray-400 text-base md:text-xl leading-relaxed max-w-xl md:max-w-2xl font-light mb-8 md:mb-0">
-                  I engineer <span className="text-white">scalable systems</span> with a
-                  <span className="text-white"> builder’s mindset</span>, turning ideas into products
-                  that feel intuitive, practical, and meaningful to use.
-                </p>
-                <div className="mt-8 md:mt-10 flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-                  <a href="#work" className="px-8 py-4 bg-white text-black rounded-full font-medium text-sm hover:bg-gray-200 transition-all flex items-center justify-center gap-2 group w-full sm:w-auto">
-                    View My Work
-                    <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                  </a>
-                  <a href="mailto:iharishbarathis@gmail.com" className="px-8 py-4 glass text-white rounded-full font-medium text-sm hover:bg-white/10 transition-all w-full sm:w-auto justify-center flex">
-                    Get in touch
-                  </a>
-                </div>
-              </div>
-
-              {/* Eye Section Integrated into Grid but shifted */}
-              <div className="lg:col-span-12 xl:col-span-4 flex justify-center xl:justify-end mt-8 lg:mt-0">
-                <div className="relative group scale-50 sm:scale-75 lg:scale-100">
-                  <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full blur opacity-10 group-hover:opacity-20 transition duration-1000"></div>
-                  <div className="relative w-64 h-64 flex items-center justify-center">
-                    {/* Ripple Waves - Vibrant background-themed colors */}
-                    <div className="ripple text-blue-500/40"></div>
-                    <div className="ripple text-purple-500/40"></div>
-                    <div className="ripple text-indigo-500/40"></div>
-                    <div className="ripple text-blue-400/30"></div>
-
-                    {/* Main Ball Container */}
-                    <div className="relative w-full h-full bg-black/40 backdrop-blur-xl rounded-full flex items-center justify-center border border-white/10 overflow-hidden z-10">
-                      <div
-                        ref={eyesRef}
-                        className="flex space-x-10"
-                      >
-                        {/* Left Eye */}
-                        <div className="eye relative w-16 h-16 bg-white rounded-full border-4 border-gray-900 flex items-center justify-center shadow-inner">
-                          <div className="pupil w-7 h-7 bg-black rounded-full transition-transform duration-75 ease-out shadow-lg"></div>
-                        </div>
-                        {/* Right Eye */}
-                        <div className="eye relative w-16 h-16 bg-white rounded-full border-4 border-gray-900 flex items-center justify-center shadow-inner">
-                          <div className="pupil w-7 h-7 bg-black rounded-full transition-transform duration-75 ease-out shadow-lg"></div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+            <div className="flex flex-col items-start max-w-2xl">
+              <p className="text-gray-500 font-mono text-xs uppercase tracking-widest mb-4">Engineer</p>
+              <h1 className="text-5xl sm:text-6xl md:text-7xl font-heading font-bold tracking-tight leading-tight text-white mb-6">
+                Harish Barathi S
+              </h1>
+              <p className="text-gray-400 text-lg leading-relaxed mb-10">
+                I build scalable systems and products — turning ideas into things that feel intuitive and practical to use.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <a href="#work" className="px-6 py-3 bg-white text-black rounded-full font-medium text-sm hover:bg-gray-200 transition-colors flex items-center gap-2 group">
+                  View My Work
+                  <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                </a>
+                <a href="mailto:iharishbarathis@gmail.com" className="px-6 py-3 border border-white/15 text-white rounded-full font-medium text-sm hover:bg-white/5 transition-colors flex items-center justify-center">
+                  Get in touch
+                </a>
               </div>
             </div>
           </section>
@@ -387,69 +294,133 @@ export default function Portfolio() {
 
           {/* Solutions Section */}
           <section id="work" className="py-16 md:py-32 border-t border-white/5 relative z-10 scroll-mt-24">
-            <div className="mb-12 md:mb-16">
-              <h2 className="text-3xl md:text-5xl font-heading font-bold mb-4">Solutions</h2>
-              <p className="text-gray-500 font-mono text-xs uppercase tracking-widest">
-                / Systems and applications I&apos;ve built
-              </p>
+            <div className="mb-12 md:mb-16 flex justify-between items-end">
+              <div>
+                <h2 className="text-3xl md:text-5xl font-heading font-bold mb-4">Solutions</h2>
+                <p className="text-gray-500 font-mono text-xs uppercase tracking-widest">
+                  / Systems and applications I&apos;ve built
+                </p>
+              </div>
+
+              {/* Architecture Mode Toggle */}
+              <div className="flex items-center gap-3">
+                <span className={`text-[10px] font-mono uppercase tracking-widest transition-colors duration-300 ${!isArchitectureMode ? 'text-white' : 'text-gray-600'}`}>
+                  Overview
+                </span>
+                <button
+                  onClick={() => setIsArchitectureMode(!isArchitectureMode)}
+                  className={`w-12 h-6 rounded-full p-1 transition-colors duration-300 ${isArchitectureMode ? 'bg-blue-500' : 'bg-gray-700'
+                    } relative z-20`}
+                >
+                  <div className={`w-4 h-4 rounded-full bg-white shadow-sm transition-transform duration-300 ${isArchitectureMode ? 'translate-x-6' : 'translate-x-0'
+                    }`} />
+                </button>
+                <span className={`text-[10px] font-mono uppercase tracking-widest transition-colors duration-300 ${isArchitectureMode ? 'text-white' : 'text-gray-600'}`}>
+                  Architecture
+                </span>
+              </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {projects.map((project, index) => (
-                <a
-                  key={index}
-                  href={project.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group block"
-                >
-                  <div className="h-full glass-dark rounded-3xl p-6 md:p-8 border border-white/5 hover:border-white/20 transition-all duration-500 hover:-translate-y-2 flex flex-col group/card">
-                    <div className="flex justify-between items-start mb-6">
-                      <div className="flex flex-wrap gap-2">
-                        {project.tech.slice(0, 3).map((tech, techIndex) => (
-                          <span
-                            key={techIndex}
-                            className="text-[10px] px-3 py-1 bg-white/5 text-gray-400 rounded-full font-mono uppercase tracking-wider"
-                          >
-                            {tech}
-                          </span>
-                        ))}
-                      </div>
-                      <span className="text-gray-600 font-mono text-xs">{project.year}</span>
-                    </div>
+                <div key={index} className="group perspective-1000 h-[500px]">
+                  <div className={`relative w-full h-full transition-all duration-700 transform-style-3d ${isArchitectureMode ? 'rotate-y-180' : 'rotate-y-0'}`}>
 
-                    <div className="mb-4">
-                      <div className="flex items-center gap-2 mb-2">
-                        <div className="p-1.5 rounded-lg bg-blue-500/10 border border-blue-500/20 text-blue-400 group-hover/card:scale-110 transition-transform duration-500">
-                          {project.category === "Product" && <Box size={14} className="animate-pulse" />}
-                          {project.category === "Python Package" && <Package size={14} className="animate-pulse" />}
-                          {project.category === "Learning Project" && <BookOpen size={14} className="animate-pulse" />}
+                    {/* FRONT FACE (Project Details) */}
+                    <div className="absolute inset-0 backface-hidden">
+                      <a
+                        href={project.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block h-full"
+                      >
+                        <div className="h-full glass-dark rounded-3xl p-6 md:p-8 border border-white/5 hover:border-white/20 transition-all duration-500 hover:-translate-y-2 flex flex-col group/card relative overflow-hidden">
+                          <div className="flex justify-between items-start mb-6 relative z-10">
+                            <div className="flex flex-wrap gap-2">
+                              {project.tech.slice(0, 3).map((tech, techIndex) => (
+                                <span
+                                  key={techIndex}
+                                  className="text-[10px] px-3 py-1 bg-white/5 text-gray-400 rounded-full font-mono uppercase tracking-wider"
+                                >
+                                  {tech}
+                                </span>
+                              ))}
+                            </div>
+                            <span className="text-gray-600 font-mono text-xs">{project.year}</span>
+                          </div>
+
+                          <div className="mb-4 relative z-10">
+                            <div className="flex items-center gap-2 mb-2">
+                              <div className="p-1.5 rounded-lg bg-blue-500/10 border border-blue-500/20 text-blue-400 group-hover/card:scale-110 transition-transform duration-500">
+                                {project.category === "Product" && <Box size={14} className="animate-pulse" />}
+                                {project.category === "Python Package" && <Package size={14} className="animate-pulse" />}
+                                {project.category === "Learning Project" && <BookOpen size={14} className="animate-pulse" />}
+                              </div>
+                              <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-blue-400/80 font-bold">
+                                {project.category}
+                              </span>
+                            </div>
+                            <h3 className="text-2xl md:text-3xl font-heading font-bold group-hover/card:text-blue-400 transition-colors">
+                              {project.title}
+                            </h3>
+                          </div>
+
+                          {project.achievement && (
+                            <div className="inline-flex items-center gap-2 px-3 py-1 bg-yellow-500/10 text-yellow-500 rounded-full border border-yellow-500/20 text-[10px] font-mono uppercase tracking-wider mb-4 w-fit relative z-10">
+                              🏆 {project.achievement}
+                            </div>
+                          )}
+
+                          <div className="flex-grow relative z-10">
+                            <p className="text-gray-400 text-sm leading-relaxed mb-8">
+                              {project.description}
+                            </p>
+                          </div>
+
+                          <div className="flex items-center gap-2 text-xs font-mono text-white group-hover:gap-4 transition-all relative z-10">
+                            VIEW PROJECT
+                            <ArrowUpRight className="w-4 h-4" />
+                          </div>
                         </div>
-                        <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-blue-400/80 font-bold">
-                          {project.category}
-                        </span>
-                      </div>
-                      <h3 className="text-2xl md:text-3xl font-heading font-bold group-hover/card:text-blue-400 transition-colors">
-                        {project.title}
-                      </h3>
+                      </a>
                     </div>
 
-                    {project.achievement && (
-                      <div className="inline-flex items-center gap-2 px-3 py-1 bg-yellow-500/10 text-yellow-500 rounded-full border border-yellow-500/20 text-[10px] font-mono uppercase tracking-wider mb-4 w-fit">
-                        🏆 {project.achievement}
+                    {/* BACK FACE (Architecture Diagram) */}
+                    <div className="absolute inset-0 backface-hidden rotate-y-180">
+                      <div className="h-full glass-dark rounded-3xl p-6 md:p-8 border border-white/5 overflow-hidden relative flex flex-col">
+                        <div className="absolute inset-0 bg-blue-950/20 z-0"></div>
+                        <div className="absolute inset-0 network-grid opacity-20 z-0"></div>
+
+                        <div className="relative z-10 flex flex-col h-full">
+                          <div className="flex justify-between items-center mb-6">
+                            <h3 className="text-xl font-heading font-bold text-blue-400">Architecture</h3>
+                            <div className="px-3 py-1 bg-blue-500/10 border border-blue-500/20 rounded-full text-[10px] font-mono text-blue-300 uppercase">
+                              System Design
+                            </div>
+                          </div>
+
+                          <div className="flex-grow relative rounded-xl overflow-hidden border border-white/10 group/diagram cursor-pointer bg-black/50">
+                            {/* Placeholder for Dynamic Diagram Image */}
+                            <Image
+                              src="https://placehold.co/600x400/0f172a/3b82f6?text=Architecture+Diagram"
+                              alt={`${project.title} Architecture`}
+                              fill
+                              className="object-cover opacity-80 group-hover/diagram:opacity-100 group-hover/diagram:scale-105 transition-all duration-700"
+                            />
+
+                            {/* Diagram Overlay Info */}
+                            <div className="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-black/90 to-transparent">
+                              <p className="text-xs text-gray-300 font-mono leading-relaxed">
+                                {project.architecture}
+                              </p>
+                            </div>
+                          </div>
+                        </div>
                       </div>
-                    )}
-
-                    <p className="text-gray-400 text-sm leading-relaxed mb-8 flex-grow">
-                      {project.description}
-                    </p>
-
-                    <div className="flex items-center gap-2 text-xs font-mono text-white group-hover:gap-4 transition-all">
-                      VIEW PROJECT
-                      <ArrowUpRight className="w-4 h-4" />
                     </div>
+
                   </div>
-                </a>
+                </div>
               ))}
             </div>
           </section>
