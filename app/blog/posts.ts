@@ -15,7 +15,9 @@ export type Block =
   | { type: "image"; src: string; alt: string; description: string }
   // An inline, hand-drawn SVG figure (no image file needed). `variant` picks
   // which diagram to render in the page; `description` is the AI-facing text.
-  | { type: "diagram"; variant: string; caption?: string; description: string };
+  | { type: "diagram"; variant: string; caption?: string; description: string }
+  // A small footer note (credits, acknowledgements) with an optional link.
+  | { type: "note"; text: string; href?: string; linkText?: string };
 
 export type Post = {
   slug: string;
@@ -321,6 +323,12 @@ export const posts: Post[] = [
         type: "p",
         text: "These glasses will never get official docs. But now I can build on them — and the assistant I actually wanted turned out to be a data layer, and a good pair-programmer, away.",
       },
+      {
+        type: "note",
+        text: "Built on top of FerSaiyan's open-source HeyCyan SDK — thanks to them for the groundwork.",
+        href: "https://github.com/FerSaiyan/Alternative-HeyCyan-App-and-SDK",
+        linkText: "View the repo",
+      },
     ],
   },
 ];
@@ -356,6 +364,10 @@ function blockToMarkdown(block: Block): string {
     case "diagram":
       // No image file — the description IS the machine-readable representation.
       return `*Diagram: ${block.description}*`;
+    case "note":
+      return block.href
+        ? `${block.text} [${block.linkText ?? "link"}](${block.href})`
+        : block.text;
   }
 }
 

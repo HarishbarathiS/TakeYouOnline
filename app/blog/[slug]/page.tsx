@@ -234,6 +234,25 @@ function BlockView({ block }: { block: Block }) {
           )}
         </figure>
       );
+    case "note":
+      return (
+        <div className="mt-12 pt-6 border-t border-white/10 text-xs text-gray-500 leading-relaxed">
+          {block.text}
+          {block.href && (
+            <>
+              {" "}
+              <a
+                href={block.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-400 underline underline-offset-4 hover:text-blue-300 transition-colors"
+              >
+                {block.linkText ?? "link"} ↗
+              </a>
+            </>
+          )}
+        </div>
+      );
   }
 }
 
