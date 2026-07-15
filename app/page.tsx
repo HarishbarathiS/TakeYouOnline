@@ -15,8 +15,8 @@ export default function Portfolio() {
       description: (
         <>
           An expense splitting app with{" "}
-          <span className="text-white font-medium">300+ users</span>, designed to
-          provide an intuitive and smooth experience. Features include simple
+          <span className="text-white font-medium">300+ users</span>, designed
+          to provide an intuitive and smooth experience. Features include simple
           onboarding, clear navigation, ability to scan and upload bills,
           item-wise splitting, and Pay with UPI.
         </>
@@ -38,14 +38,12 @@ export default function Portfolio() {
       description: (
         <>
           An end-to-end task management platform with{" "}
-          <span className="text-white font-medium">
-            176+ active projects
-          </span>{" "}
+          <span className="text-white font-medium">176+ active projects</span>{" "}
           being worked on, built for streamlined project workflow approvals.
-          Developed a dynamic workflow system where project managers create tasks
-          that pass through multiple review and correction stages, with automatic
-          routing based on task status. Integrated versioned file uploads, access
-          control, and a clean UI for team collaboration.
+          Developed a dynamic workflow system where project managers create
+          tasks that pass through multiple review and correction stages, with
+          automatic routing based on task status. Integrated versioned file
+          uploads, access control, and a clean UI for team collaboration.
         </>
       ),
       tech: [
@@ -74,7 +72,7 @@ export default function Portfolio() {
       description:
         "A standalone image-moderation microservice that classifies an image as safe or NSFW. Exposes a versioned, API-key-authenticated endpoint with health checks, packaged as a CUDA-free Docker image and deployed on Render.",
       tech: ["Python", "FastAPI", "PyTorch", "Docker", "Render"],
-      link: "https://nsfw-check-service.onrender.com",
+      link: "https://nsfw-check-service.onrender.com/docs",
     },
     {
       title: "Dit",
@@ -355,8 +353,9 @@ export default function Portfolio() {
             </p>
             <p>
               Currently working as a Software Engineer at Dell Technologies on
-              the BIOS / Firmware team, where I automate parts of the development
-              workflow and build AI systems that speed up delivery cycles.
+              the BIOS / Firmware team, where I automate parts of the
+              development workflow and build AI systems that speed up delivery
+              cycles.
             </p>
           </div>
           <div className="mb-8">
