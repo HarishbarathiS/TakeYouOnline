@@ -233,9 +233,9 @@ export default function Portfolio() {
               Reverse engineering the HeyCyan smart glasses.
             </p>
             <p>
-              Tearing down the firmware and companion app to swap out the stock
-              assistant for my own AI — and take back control of the data layer,
-              so what the glasses see and hear stays on my terms.
+              Reverse engineering the firmware and vendor app to take back
+              control of the data layer, so what the glasses see and hear stays
+              on my terms.
             </p>
           </div>
         </section>
