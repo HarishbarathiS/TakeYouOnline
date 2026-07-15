@@ -3,6 +3,23 @@
 import Link from "next/link";
 import GithubHeatmap from "@/components/GithubHeatmap";
 import { useClock } from "@/lib/useClock";
+import { SITE_URL, SITE_DESCRIPTION, AUTHOR } from "@/lib/site";
+
+// Schema.org Person — lets search engines and AI agents extract a reliable,
+// structured identity (who, role, employer, linked profiles) instead of
+// guessing from the page text.
+const personLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: AUTHOR.name,
+  url: SITE_URL,
+  jobTitle: AUTHOR.jobTitle,
+  worksFor: { "@type": "Organization", name: AUTHOR.worksFor },
+  email: `mailto:${AUTHOR.email}`,
+  address: { "@type": "PostalAddress", addressLocality: AUTHOR.location },
+  description: SITE_DESCRIPTION,
+  sameAs: AUTHOR.sameAs,
+};
 
 export default function Portfolio() {
   const time = useClock();
@@ -154,6 +171,10 @@ export default function Portfolio() {
 
   return (
     <div className="min-h-screen text-white text-sm">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(personLd) }}
+      />
       {/* Nav */}
       <header className="sticky top-0 z-50 bg-transparent">
         <div className="max-w-3xl mx-auto px-6 py-4 flex justify-between items-center">

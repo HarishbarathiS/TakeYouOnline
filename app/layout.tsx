@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist_Mono, Instrument_Serif } from "next/font/google";
 import "./globals.css";
+import { SITE_URL, SITE_TITLE, SITE_DESCRIPTION, SITE_NAME } from "@/lib/site";
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
@@ -13,11 +14,6 @@ const instrumentSerif = Instrument_Serif({
   weight: "400",
   style: ["normal", "italic"],
 });
-
-const SITE_URL = "https://harishbarathi.in";
-const SITE_TITLE = "Harish Barathi S - Software Engineer";
-const SITE_DESCRIPTION =
-  "Software engineer passionate about building scalable systems, elegant architectures, and tools that make a difference. Currently a Software Engineer at Dell Technologies.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -33,7 +29,7 @@ export const metadata: Metadata = {
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
     url: SITE_URL,
-    siteName: "Harish Barathi S",
+    siteName: SITE_NAME,
     type: "website",
   },
   twitter: {

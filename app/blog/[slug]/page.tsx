@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { getPost, postToMarkdown, posts, type Block } from "../posts";
 import ViewCounter from "./ViewCounter";
 import CopyForAI from "./CopyForAI";
+import { SITE_URL, SITE_NAME, AUTHOR } from "@/lib/site";
 
 export function generateStaticParams() {
   return posts.map((p) => ({ slug: p.slug }));
@@ -17,9 +18,25 @@ export async function generateMetadata({
   const { slug } = await params;
   const post = getPost(slug);
   if (!post) return {};
+  const url = `${SITE_URL}/blog/${slug}`;
   return {
-    title: `${post.title} — Harish Barathi S`,
+    title: `${post.title} — ${SITE_NAME}`,
     description: post.summary,
+    alternates: { canonical: `/blog/${slug}` },
+    openGraph: {
+      type: "article",
+      title: post.title,
+      description: post.summary,
+      url,
+      siteName: SITE_NAME,
+      publishedTime: post.date,
+      authors: [AUTHOR.name],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.summary,
+    },
   };
 }
 
@@ -267,8 +284,30 @@ export default async function Post({
 
   const markdown = postToMarkdown(post);
 
+  // Schema.org BlogPosting — structured facts (headline, date, author) that
+  // crawlers and agents can read directly, no HTML parsing required.
+  const blogPostingLd = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.title,
+    description: post.summary,
+    datePublished: post.date,
+    dateModified: post.date,
+    author: {
+      "@type": "Person",
+      name: AUTHOR.name,
+      url: SITE_URL,
+    },
+    mainEntityOfPage: `${SITE_URL}/blog/${post.slug}`,
+    url: `${SITE_URL}/blog/${post.slug}`,
+  };
+
   return (
     <div className="min-h-screen text-white text-sm">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(blogPostingLd) }}
+      />
       {/* Nav */}
       <header className="sticky top-0 z-50 bg-transparent">
         <div className="max-w-3xl mx-auto px-6 py-4 flex justify-between items-center">

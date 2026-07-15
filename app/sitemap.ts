@@ -1,8 +1,6 @@
 import type { MetadataRoute } from "next";
 import { posts } from "./blog/posts";
-
-// The canonical origin. Keep in sync with metadataBase in app/layout.tsx.
-const SITE_URL = "https://harishbarathi.in";
+import { SITE_URL } from "@/lib/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes = ["", "/lab", "/blog"].map((path) => ({
