@@ -308,10 +308,6 @@ export const posts: Post[] = [
         text: "The thing I keep coming back to is how wrong the decompiler let me be. Reading the decompiled app felt like understanding the system, and I was maybe 90% right — the dangerous kind of wrong, because the missing 10% was invisible from the source and cost me days. The details that actually broke everything — the required User-Agent header, the SDK's byte-reading IP bug, the real /files/media.config path — couldn't be seen just by reading the code. It looked complete and correct.",
       },
       {
-        type: "quote",
-        text: "The code tells you the shape of a thing; the wire tells you what it actually does.",
-      },
-      {
         type: "p",
         text: "The other shift was how I started treating failures. Early on, every silent command and every 400 felt like a wall. Somewhere in the middle it flipped and I began reading them as the device telling me something specific — a 400 that never changes is \"your request is malformed,\" not \"no\"; a timeout only after recording video is \"I'm busy,\" not \"I'm broken.\" Working with the AI reinforced that, because its instinct was always to form a hypothesis about why something failed rather than just retry it.",
       },
