@@ -12,7 +12,10 @@ export type Block =
   | { type: "stats"; items: { value: string; label: string }[] }
   // src may be empty — the page then shows a labelled placeholder so you know
   // exactly which image to drop in, and the description still feeds the AI layer.
-  | { type: "image"; src: string; alt: string; description: string };
+  | { type: "image"; src: string; alt: string; description: string }
+  // An inline, hand-drawn SVG figure (no image file needed). `variant` picks
+  // which diagram to render in the page; `description` is the AI-facing text.
+  | { type: "diagram"; variant: string; caption?: string; description: string };
 
 export type Post = {
   slug: string;
@@ -84,7 +87,7 @@ export const posts: Post[] = [
   },
   {
     slug: "reverse-engineering-heycyan",
-    title: "How I reverse-engineered my smart glasses and built my own app to escape vendor lock-in",
+    title: "How I reverse-engineered my smart glasses and built my own app to take back control of the input data",
     date: "2026-07-13",
     readingTime: "9 min",
     summary:
@@ -151,9 +154,10 @@ export const posts: Post[] = [
         code: "[ 0x02, 0x01, 0x04, 0x01 ]   // \"start the transfer network\"",
       },
       {
-        type: "image",
-        src: "",
-        alt: "Diagram of the two-transport architecture",
+        type: "diagram",
+        variant: "two-transport",
+        caption:
+          "Two transports, two jobs: Bluetooth kickstarts the transfer, Wi-Fi Direct carries the files.",
         description:
           "A simple diagram: Bluetooth is the 'doorbell' (a tiny control command), and Wi-Fi Direct is the actual 'data pipe' — the glasses run an HTTP server the phone downloads full-resolution files from.",
       },
@@ -349,6 +353,9 @@ function blockToMarkdown(block: Block): string {
     case "image":
       // The description is the AI-facing text — it survives even with no image file.
       return `![${block.alt}](${block.src})\n\n*Image: ${block.description}*`;
+    case "diagram":
+      // No image file — the description IS the machine-readable representation.
+      return `*Diagram: ${block.description}*`;
   }
 }
 

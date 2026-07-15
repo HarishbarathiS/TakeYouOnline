@@ -28,9 +28,10 @@ export default async function Blog() {
         <div className="max-w-3xl mx-auto px-6 py-4 flex justify-between items-center">
           <Link
             href="/"
+            aria-label="Back to home"
             className="text-xs uppercase tracking-widest hover:text-gray-400 transition-colors"
           >
-            ← Harish Barathi S
+            ←
           </Link>
           <nav className="flex items-center gap-6 text-xs text-gray-500 uppercase tracking-widest">
             <Link href="/blog" className="text-white transition-colors">
@@ -50,6 +51,12 @@ export default async function Blog() {
             </Link>
             <Link href="/#now" className="hover:text-white transition-colors">
               Now
+            </Link>
+            <Link
+              href="/#contact"
+              className="hover:text-white transition-colors"
+            >
+              Contact
             </Link>
           </nav>
         </div>

@@ -47,8 +47,8 @@ export default function HomeLab() {
       {/* Nav */}
       <header className="sticky top-0 z-50 bg-transparent">
         <div className="max-w-3xl mx-auto px-6 py-4 flex justify-between items-center">
-          <Link href="/" className="text-xs uppercase tracking-widest hover:text-gray-400 transition-colors">
-            ← Harish Barathi S
+          <Link href="/" aria-label="Back to home" className="text-xs uppercase tracking-widest hover:text-gray-400 transition-colors">
+            ←
           </Link>
           <nav className="flex items-center gap-6 text-xs text-gray-500 uppercase tracking-widest">
             <Link href="/blog" className="hover:text-white transition-colors">Blog</Link>
@@ -56,6 +56,7 @@ export default function HomeLab() {
             <Link href="/#experience" className="hover:text-white transition-colors">Exp</Link>
             <Link href="/lab" className="text-white transition-colors">Lab</Link>
             <Link href="/#now" className="hover:text-white transition-colors">Now</Link>
+            <Link href="/#contact" className="hover:text-white transition-colors">Contact</Link>
           </nav>
         </div>
       </header>
@@ -149,7 +150,7 @@ export default function HomeLab() {
           </p>
           <div className="flex gap-6 text-xs uppercase tracking-widest">
             <a
-              href="mailto:iharishbarathis@gmail.com"
+              href="mailto:harishbarathi.tech@gmail.com"
               className="underline underline-offset-4 hover:text-gray-400 transition-colors"
             >
               Email

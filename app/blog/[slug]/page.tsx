@@ -17,7 +17,10 @@ export async function generateMetadata({
   const { slug } = await params;
   const post = getPost(slug);
   if (!post) return {};
-  return { title: `${post.title} — Harish Barathi S`, description: post.summary };
+  return {
+    title: `${post.title} — Harish Barathi S`,
+    description: post.summary,
+  };
 }
 
 function formatDate(iso: string) {
@@ -28,12 +31,132 @@ function formatDate(iso: string) {
   });
 }
 
+// Hand-drawn figure: Bluetooth is the "doorbell" (a tiny leftward control
+// command), Wi-Fi Direct is the "data pipe" (a fat rightward transfer). Pure
+// inline SVG so it needs no image file and inherits the site's mono font.
+function TwoTransportDiagram() {
+  return (
+    <svg
+      viewBox="0 0 720 220"
+      role="img"
+      aria-label="Bluetooth is a tiny control command that triggers the glasses; Wi-Fi Direct is the data pipe that carries full-resolution files to the phone."
+      className="w-full h-auto min-w-[520px]"
+      style={{ fontFamily: "var(--font-geist-mono), ui-monospace, monospace" }}
+    >
+      <defs>
+        <marker
+          id="ah-gray"
+          markerWidth="8"
+          markerHeight="8"
+          refX="6"
+          refY="3"
+          orient="auto"
+          markerUnits="userSpaceOnUse"
+        >
+          <path d="M0,0 L6,3 L0,6 Z" fill="#9ca3af" />
+        </marker>
+        <marker
+          id="ah-blue"
+          markerWidth="9"
+          markerHeight="9"
+          refX="7"
+          refY="3.5"
+          orient="auto"
+          markerUnits="userSpaceOnUse"
+        >
+          <path d="M0,0 L7,3.5 L0,7 Z" fill="#60a5fa" />
+        </marker>
+      </defs>
+
+      {/* Nodes */}
+      <rect
+        x="20"
+        y="70"
+        width="200"
+        height="90"
+        rx="8"
+        fill="rgba(255,255,255,0.04)"
+        stroke="rgba(255,255,255,0.15)"
+      />
+      <text x="120" y="110" textAnchor="middle" fill="#ffffff" fontSize="14">
+        Smart Glasses
+      </text>
+      <text x="120" y="132" textAnchor="middle" fill="#8b93a1" fontSize="11">
+        runs an HTTP server
+      </text>
+
+      <rect
+        x="500"
+        y="70"
+        width="200"
+        height="90"
+        rx="8"
+        fill="rgba(255,255,255,0.04)"
+        stroke="rgba(255,255,255,0.15)"
+      />
+      <text x="600" y="110" textAnchor="middle" fill="#ffffff" fontSize="14">
+        Phone
+      </text>
+      <text x="600" y="132" textAnchor="middle" fill="#8b93a1" fontSize="11">
+        my app
+      </text>
+
+      {/* Bluetooth — the doorbell (tiny leftward trigger) */}
+      <text
+        x="360"
+        y="40"
+        textAnchor="middle"
+        fill="#9ca3af"
+        fontSize="11"
+        letterSpacing="1.5"
+      >
+        Bluetooth kickstarts the transfer
+      </text>
+      <line
+        x1="494"
+        y1="60"
+        x2="226"
+        y2="60"
+        stroke="#9ca3af"
+        strokeWidth="1.5"
+        strokeDasharray="5 4"
+        markerEnd="url(#ah-gray)"
+      />
+      <text x="360" y="78" textAnchor="middle" fill="#6b7280" fontSize="12">
+        [ 02 01 04 01 ]
+      </text>
+
+      {/* Wi-Fi Direct — the data pipe (fat rightward transfer) */}
+      <line
+        x1="226"
+        y1="150"
+        x2="494"
+        y2="150"
+        stroke="#60a5fa"
+        strokeWidth="3"
+        markerEnd="url(#ah-blue)"
+      />
+      <text
+        x="360"
+        y="180"
+        textAnchor="middle"
+        fill="#60a5fa"
+        fontSize="11"
+        letterSpacing="1.5"
+      >
+        WI-FI DIRECT — THE DATA PIPE
+      </text>
+      <text x="360" y="198" textAnchor="middle" fill="#6b7280" fontSize="11">
+        full-resolution files
+      </text>
+    </svg>
+  );
+}
+
 function BlockView({ block }: { block: Block }) {
   switch (block.type) {
     case "h2":
-      return (
-        <h2 className="text-lg text-white mt-10 mb-4">{block.text}</h2>
-      );
+      return <h2 className="text-lg text-white mt-10 mb-4">{block.text}</h2>;
     case "p":
       return <p className="text-gray-400 leading-relaxed mb-5">{block.text}</p>;
     case "quote":
@@ -98,6 +221,19 @@ function BlockView({ block }: { block: Block }) {
           </figcaption>
         </figure>
       );
+    case "diagram":
+      return (
+        <figure className="my-8">
+          <div className="bg-white/5 border border-white/10 rounded p-4 md:p-6 overflow-x-auto">
+            {block.variant === "two-transport" && <TwoTransportDiagram />}
+          </div>
+          {block.caption && (
+            <figcaption className="text-xs text-gray-500 mt-2">
+              {block.caption}
+            </figcaption>
+          )}
+        </figure>
+      );
   }
 }
 
@@ -141,6 +277,12 @@ export default async function Post({
             </Link>
             <Link href="/#now" className="hover:text-white transition-colors">
               Now
+            </Link>
+            <Link
+              href="/#contact"
+              className="hover:text-white transition-colors"
+            >
+              Contact
             </Link>
           </nav>
         </div>

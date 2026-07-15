@@ -177,6 +177,9 @@ export default function Portfolio() {
             <a href="#now" className="hover:text-white transition-colors">
               Now
             </a>
+            <a href="#contact" className="hover:text-white transition-colors">
+              Contact
+            </a>
           </nav>
         </div>
       </header>
@@ -194,21 +197,7 @@ export default function Portfolio() {
             I build products, the systems behind them, and take things apart to
             understand them — usually over-engineering somewhere along the way.
           </p>
-          <div className="flex gap-6 text-xs uppercase tracking-widest">
-            <a
-              href="#work"
-              className="underline underline-offset-4 hover:text-gray-400 transition-colors"
-            >
-              Work
-            </a>
-            <a
-              href="mailto:iharishbarathis@gmail.com"
-              className="underline underline-offset-4 hover:text-gray-400 transition-colors"
-            >
-              Contact
-            </a>
-          </div>
-          <div className="mt-10 flex gap-8 text-xs text-gray-500 uppercase tracking-widest">
+          <div className="flex gap-8 text-xs text-gray-500 uppercase tracking-widest">
             <span>Chennai, IN</span>
             <span>{time}</span>
           </div>
@@ -392,7 +381,7 @@ export default function Portfolio() {
         </section>
 
         {/* Contact */}
-        <section className="py-16 section-divide">
+        <section id="contact" className="py-16 section-divide scroll-mt-16">
           <h2 className="font-serif text-2xl md:text-3xl text-white inline-block pb-3 mb-6 border-b-2 border-white/40">
             Contact
           </h2>
@@ -402,7 +391,7 @@ export default function Portfolio() {
           </p>
           <div className="flex gap-6 text-xs uppercase tracking-widest">
             <a
-              href="mailto:iharishbarathis@gmail.com"
+              href="mailto:harishbarathi.tech@gmail.com"
               className="underline underline-offset-4 hover:text-gray-400 transition-colors"
             >
               Email
