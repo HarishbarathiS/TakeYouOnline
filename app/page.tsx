@@ -191,9 +191,8 @@ export default function Portfolio() {
             Harish Barathi S
           </h1>
           <p className="text-gray-400 leading-relaxed max-w-xl mb-8">
-            I build scalable systems and products — turning ideas into things
-            that feel intuitive and practical to use. (jk more like over
-            engineering stuff because it is fun)
+            I build products, the systems behind them, and take things apart to
+            understand them — usually over-engineering somewhere along the way.
           </p>
           <div className="flex gap-6 text-xs uppercase tracking-widest">
             <a
