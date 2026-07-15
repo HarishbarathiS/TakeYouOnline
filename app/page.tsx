@@ -1,33 +1,26 @@
 "use client";
 
-import React, { useEffect } from "react";
 import Link from "next/link";
 import GithubHeatmap from "@/components/GithubHeatmap";
+import { useClock } from "@/lib/useClock";
 
 export default function Portfolio() {
-  const [time, setTime] = React.useState<string>("00:00");
-
-  useEffect(() => {
-    const formatTime = () =>
-      new Date().toLocaleTimeString("en-US", {
-        hour: "2-digit",
-        minute: "2-digit",
-        hour12: false,
-        timeZone: "Asia/Kolkata",
-      });
-
-    setTime(formatTime());
-    const timer = setInterval(() => setTime(formatTime()), 1000);
-    return () => clearInterval(timer);
-  }, []);
+  const time = useClock();
 
   const projects = [
     {
       title: "SplitOne",
       category: "Product",
       year: "2025",
-      description:
-        "An expense splitting app designed to provide an intuitive and smooth experience. Features include simple onboarding, clear navigation, ability to scan and upload bills, item-wise splitting, and Pay with UPI.",
+      description: (
+        <>
+          An expense splitting app with{" "}
+          <span className="text-white font-medium">300+ users</span>, designed to
+          provide an intuitive and smooth experience. Features include simple
+          onboarding, clear navigation, ability to scan and upload bills,
+          item-wise splitting, and Pay with UPI.
+        </>
+      ),
       tech: [
         "Next.js",
         "Supabase",
@@ -42,8 +35,19 @@ export default function Portfolio() {
       title: "Infosphere",
       category: "Product",
       year: "2025",
-      description:
-        "An end-to-end task management platform for streamlined project workflow approvals. Developed a dynamic workflow system where project managers create tasks that pass through multiple review and correction stages, with automatic routing based on task status. Integrated versioned file uploads, access control, and a clean UI for team collaboration.",
+      description: (
+        <>
+          An end-to-end task management platform with{" "}
+          <span className="text-white font-medium">
+            176+ active projects
+          </span>{" "}
+          being worked on, built for streamlined project workflow approvals.
+          Developed a dynamic workflow system where project managers create tasks
+          that pass through multiple review and correction stages, with automatic
+          routing based on task status. Integrated versioned file uploads, access
+          control, and a clean UI for team collaboration.
+        </>
+      ),
       tech: [
         "React",
         "Next.js",
@@ -53,6 +57,24 @@ export default function Portfolio() {
         "Vercel",
       ],
       link: "https://github.com/HarishbarathiS/infosphere",
+    },
+    {
+      title: "Tinybrain",
+      category: "Systems Design",
+      year: "2026",
+      description:
+        "A data-plane / control-plane split for an embedded-analytics product. The control plane owns dashboard definitions, the job queue, and the agent registry, while lightweight agents run each job's SQL against a local DuckDB and post results back — never accepting inbound connections. Includes a full design doc covering the plane boundary, protocol, and migration plan.",
+      tech: ["Python", "DuckDB", "Docker", "REST APIs"],
+      link: "https://github.com/HarishbarathiS/tiny-brain",
+    },
+    {
+      title: "NSFW Check Service",
+      category: "Microservice",
+      year: "2026",
+      description:
+        "A standalone image-moderation microservice that classifies an image as safe or NSFW. Exposes a versioned, API-key-authenticated endpoint with health checks, packaged as a CUDA-free Docker image and deployed on Render.",
+      tech: ["Python", "FastAPI", "PyTorch", "Docker", "Render"],
+      link: "https://nsfw-check-service.onrender.com",
     },
     {
       title: "Dit",
@@ -97,7 +119,7 @@ export default function Portfolio() {
       period: "February 2026 - June 2026",
       location: "India",
       description:
-        "Working on the BIOS team to automate parts of the development workflow, reducing manual effort and speeding up delivery cycles.",
+        "Worked on the BIOS/Firmware team to automate parts of the development workflow, reducing manual effort and speeding up delivery cycles.",
       achievements: [
         "Built a multi-step agent workflow to automate the work of an automation engineer, backed by a knowledge base with traceability and observability built in.",
         "Built the infrastructure for an AI system that determines the scope of a BIOS change — using a queue system to absorb request spikes, and exposing both an API for system-to-system communication and a UI layer for application-level use.",
@@ -133,12 +155,15 @@ export default function Portfolio() {
   ];
 
   return (
-    <div className="min-h-screen bg-black text-white text-sm">
+    <div className="min-h-screen text-white text-sm">
       {/* Nav */}
-      <header className="sticky top-0 z-50 bg-black border-b border-white/10">
+      <header className="sticky top-0 z-50 bg-transparent">
         <div className="max-w-3xl mx-auto px-6 py-4 flex justify-between items-center">
           <span className="text-xs uppercase tracking-widest">HBS</span>
           <nav className="flex items-center gap-6 text-xs text-gray-500 uppercase tracking-widest">
+            <Link href="/blog" className="hover:text-white transition-colors">
+              Blog
+            </Link>
             <a href="#work" className="hover:text-white transition-colors">
               Work
             </a>
@@ -193,10 +218,7 @@ export default function Portfolio() {
         </section>
 
         {/* Now */}
-        <section
-          id="now"
-          className="py-16 border-t border-white/10 scroll-mt-16"
-        >
+        <section id="now" className="py-16 section-divide scroll-mt-16">
           <div className="flex items-baseline gap-3 mb-6">
             <h2 className="font-serif text-2xl md:text-3xl text-white inline-block pb-3 border-b-2 border-white/40">
               Now
@@ -222,10 +244,7 @@ export default function Portfolio() {
         </section>
 
         {/* Experience */}
-        <section
-          id="experience"
-          className="py-16 border-t border-white/10 scroll-mt-16"
-        >
+        <section id="experience" className="py-16 section-divide scroll-mt-16">
           <h2 className="font-serif text-2xl md:text-3xl text-white inline-block pb-3 mb-8 border-b-2 border-white/40">
             Experience
           </h2>
@@ -266,10 +285,7 @@ export default function Portfolio() {
         </section>
 
         {/* Work */}
-        <section
-          id="work"
-          className="py-16 border-t border-white/10 scroll-mt-16"
-        >
+        <section id="work" className="py-16 section-divide scroll-mt-16">
           <h2 className="font-serif text-2xl md:text-3xl text-white inline-block pb-3 mb-8 border-b-2 border-white/40">
             Proof of Work
           </h2>
@@ -303,7 +319,7 @@ export default function Portfolio() {
         </section>
 
         {/* Lab */}
-        <section className="py-16 border-t border-white/10">
+        <section className="py-16 section-divide">
           <h2 className="font-serif text-2xl md:text-3xl text-white inline-block pb-3 mb-6 border-b-2 border-white/40">
             Home Lab
           </h2>
@@ -320,7 +336,7 @@ export default function Portfolio() {
         </section>
 
         {/* GitHub */}
-        <section className="py-16 border-t border-white/10">
+        <section className="py-16 section-divide">
           <h2 className="font-serif text-2xl md:text-3xl text-white inline-block pb-3 mb-6 border-b-2 border-white/40">
             GitHub Contributions
           </h2>
@@ -328,10 +344,7 @@ export default function Portfolio() {
         </section>
 
         {/* About */}
-        <section
-          id="about"
-          className="py-16 border-t border-white/10 scroll-mt-16"
-        >
+        <section id="about" className="py-16 section-divide scroll-mt-16">
           <h2 className="font-serif text-2xl md:text-3xl text-white inline-block pb-3 mb-6 border-b-2 border-white/40">
             About
           </h2>
@@ -341,10 +354,9 @@ export default function Portfolio() {
               that solve real-world problems.
             </p>
             <p>
-              Currently working as a Software Engineer Intern at HealthPilot,
-              focusing on scaling medical expertise through automation. My work
-              involves building robust administrative platforms and integrating
-              AI solutions to improve patient care plans.
+              Currently working as a Software Engineer at Dell Technologies on
+              the BIOS / Firmware team, where I automate parts of the development
+              workflow and build AI systems that speed up delivery cycles.
             </p>
           </div>
           <div className="mb-8">
@@ -382,7 +394,7 @@ export default function Portfolio() {
         </section>
 
         {/* Contact */}
-        <section className="py-16 border-t border-white/10">
+        <section className="py-16 section-divide">
           <h2 className="font-serif text-2xl md:text-3xl text-white inline-block pb-3 mb-6 border-b-2 border-white/40">
             Contact
           </h2>
@@ -409,11 +421,17 @@ export default function Portfolio() {
             >
               LinkedIn
             </a>
+            <a
+              href="https://youtube.com/@harishbarathi?si=azC1oDP3DMeZuI1J"
+              className="underline underline-offset-4 hover:text-gray-400 transition-colors"
+            >
+              YouTube
+            </a>
           </div>
         </section>
       </main>
 
-      <footer className="border-t border-white/10 py-8">
+      <footer className="section-divide py-8">
         <div className="max-w-3xl mx-auto px-6 text-xs text-gray-500 uppercase tracking-widest">
           © 2026 Harish Barathi S
         </div>

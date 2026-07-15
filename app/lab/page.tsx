@@ -1,24 +1,10 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
 import Link from "next/link";
+import { useClock } from "@/lib/useClock";
 
 export default function HomeLab() {
-  const [time, setTime] = useState<string>("00:00");
-
-  useEffect(() => {
-    const formatTime = () =>
-      new Date().toLocaleTimeString("en-US", {
-        hour: "2-digit",
-        minute: "2-digit",
-        hour12: false,
-        timeZone: "Asia/Kolkata",
-      });
-
-    setTime(formatTime());
-    const timer = setInterval(() => setTime(formatTime()), 1000);
-    return () => clearInterval(timer);
-  }, []);
+  const time = useClock();
 
   const services = [
     {
@@ -57,18 +43,19 @@ export default function HomeLab() {
   ];
 
   return (
-    <div className="min-h-screen bg-black text-white text-sm">
+    <div className="min-h-screen text-white text-sm">
       {/* Nav */}
-      <header className="sticky top-0 z-50 bg-black border-b border-white/10">
+      <header className="sticky top-0 z-50 bg-transparent">
         <div className="max-w-3xl mx-auto px-6 py-4 flex justify-between items-center">
           <Link href="/" className="text-xs uppercase tracking-widest hover:text-gray-400 transition-colors">
             ← Harish Barathi S
           </Link>
           <nav className="flex items-center gap-6 text-xs text-gray-500 uppercase tracking-widest">
+            <Link href="/blog" className="hover:text-white transition-colors">Blog</Link>
             <Link href="/#work" className="hover:text-white transition-colors">Work</Link>
             <Link href="/#experience" className="hover:text-white transition-colors">Exp</Link>
             <Link href="/lab" className="text-white transition-colors">Lab</Link>
-            <Link href="/#about" className="hover:text-white transition-colors">About</Link>
+            <Link href="/#now" className="hover:text-white transition-colors">Now</Link>
           </nav>
         </div>
       </header>
@@ -94,7 +81,7 @@ export default function HomeLab() {
         </section>
 
         {/* Services */}
-        <section className="py-16 border-t border-white/10">
+        <section className="py-16 section-divide">
           <h2 className="font-serif text-2xl md:text-3xl text-white inline-block pb-3 mb-8 border-b-2 border-white/40">
             Services
           </h2>
@@ -131,7 +118,7 @@ export default function HomeLab() {
         </section>
 
         {/* Specs */}
-        <section className="py-16 border-t border-white/10">
+        <section className="py-16 section-divide">
           <h2 className="font-serif text-2xl md:text-3xl text-white inline-block pb-3 mb-6 border-b-2 border-white/40">
             The Machine
           </h2>
@@ -152,7 +139,7 @@ export default function HomeLab() {
         </section>
 
         {/* Contact */}
-        <section className="py-16 border-t border-white/10">
+        <section className="py-16 section-divide">
           <h2 className="font-serif text-2xl md:text-3xl text-white inline-block pb-3 mb-6 border-b-2 border-white/40">
             Contact
           </h2>
@@ -183,7 +170,7 @@ export default function HomeLab() {
         </section>
       </main>
 
-      <footer className="border-t border-white/10 py-8">
+      <footer className="section-divide py-8">
         <div className="max-w-3xl mx-auto px-6 flex justify-between text-xs text-gray-500 uppercase tracking-widest">
           <span>© 2026 Harish Barathi S</span>
           <Link href="/" className="hover:text-white transition-colors">

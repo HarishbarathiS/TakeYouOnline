@@ -22,3 +22,23 @@ body {
   background: #ffffff;
   color: #000000;
 }
+
+/* Section divider: a hairline that fades to transparent at both ends,
+   instead of a hard edge-to-edge rule. Replaces `border-t border-white/10`. */
+.section-divide {
+  position: relative;
+}
+.section-divide::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(255, 255, 255, 0.18),
+    transparent
+  );
+}
