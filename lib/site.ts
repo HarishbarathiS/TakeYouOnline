@@ -2,7 +2,7 @@
 // robots, the llms.txt manifests, JSON-LD structured data, and the OG image.
 // Change it here once and everything downstream stays in sync.
 
-export const SITE_URL = "https://harishbarathi.in";
+export const SITE_URL = "https://www.harishbarathi.in";
 export const SITE_NAME = "Harish Barathi S";
 export const SITE_TITLE = "Harish Barathi S - Software Engineer";
 export const SITE_DESCRIPTION =
