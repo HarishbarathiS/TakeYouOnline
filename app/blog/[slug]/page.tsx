@@ -374,12 +374,6 @@ export default async function Post({
           {/* The unique feature, per-post: hand any AI a clean copy. */}
           <div className="flex flex-wrap items-center gap-4 pb-8 mb-8 border-b border-white/10">
             <CopyForAI markdown={markdown} />
-            <a
-              href="/blog/llms.txt"
-              className="text-xs uppercase tracking-widest underline underline-offset-4 hover:text-gray-400 transition-colors"
-            >
-              AI-readable ↗
-            </a>
           </div>
 
           <div className="max-w-xl">
