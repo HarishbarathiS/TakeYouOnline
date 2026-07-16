@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import GithubHeatmap from "@/components/GithubHeatmap";
+import SiteNav from "@/components/SiteNav";
 import { useClock } from "@/lib/useClock";
 import { SITE_URL, SITE_DESCRIPTION, AUTHOR } from "@/lib/site";
 
@@ -176,34 +177,7 @@ export default function Portfolio() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(personLd) }}
       />
       {/* Nav */}
-      <header className="sticky top-0 z-50 bg-transparent">
-        <div className="max-w-3xl mx-auto px-6 py-4 flex justify-between items-center">
-          <span className="text-xs uppercase tracking-widest">HBS</span>
-          <nav className="flex items-center gap-6 text-xs text-gray-500 uppercase tracking-widest">
-            <Link href="/blog" className="hover:text-white transition-colors">
-              Blog
-            </Link>
-            <a href="#work" className="hover:text-white transition-colors">
-              Work
-            </a>
-            <a
-              href="#experience"
-              className="hover:text-white transition-colors"
-            >
-              Exp
-            </a>
-            <a href="/lab" className="hover:text-white transition-colors">
-              Lab
-            </a>
-            <a href="#now" className="hover:text-white transition-colors">
-              Now
-            </a>
-            <a href="#contact" className="hover:text-white transition-colors">
-              Contact
-            </a>
-          </nav>
-        </div>
-      </header>
+      <SiteNav variant="home" />
 
       <main className="max-w-3xl mx-auto px-6">
         {/* Hero */}

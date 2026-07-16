@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { postsByDate } from "./posts";
 import { getManyViews } from "@/lib/views";
 import BookIcon from "./BookIcon";
+import SiteNav from "@/components/SiteNav";
 
 export const metadata: Metadata = {
   title: "Blog — Harish Barathi S",
@@ -24,43 +25,7 @@ export default async function Blog() {
   return (
     <div className="min-h-screen text-white text-sm">
       {/* Nav */}
-      <header className="sticky top-0 z-50 bg-transparent">
-        <div className="max-w-3xl mx-auto px-6 py-4 flex justify-between items-center">
-          <Link
-            href="/"
-            aria-label="Back to home"
-            className="text-xs uppercase tracking-widest hover:text-gray-400 transition-colors"
-          >
-            ←
-          </Link>
-          <nav className="flex items-center gap-6 text-xs text-gray-500 uppercase tracking-widest">
-            <Link href="/blog" className="text-white transition-colors">
-              Blog
-            </Link>
-            <Link href="/#work" className="hover:text-white transition-colors">
-              Work
-            </Link>
-            <Link
-              href="/#experience"
-              className="hover:text-white transition-colors"
-            >
-              Exp
-            </Link>
-            <Link href="/lab" className="hover:text-white transition-colors">
-              Lab
-            </Link>
-            <Link href="/#now" className="hover:text-white transition-colors">
-              Now
-            </Link>
-            <Link
-              href="/#contact"
-              className="hover:text-white transition-colors"
-            >
-              Contact
-            </Link>
-          </nav>
-        </div>
-      </header>
+      <SiteNav active="Blog" />
 
       <main className="max-w-3xl mx-auto px-6">
         {/* Hero */}
