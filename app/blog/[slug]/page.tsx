@@ -270,6 +270,17 @@ function BlockView({ block }: { block: Block }) {
           )}
         </div>
       );
+    case "deflist":
+      return (
+        <dl className="my-6 space-y-3">
+          {block.items.map((item, i) => (
+            <div key={i} className="flex flex-col sm:flex-row sm:gap-4">
+              <dt className="text-white shrink-0 sm:w-32">{item.term}</dt>
+              <dd className="text-gray-400 leading-relaxed">{item.desc}</dd>
+            </div>
+          ))}
+        </dl>
+      );
   }
 }
 

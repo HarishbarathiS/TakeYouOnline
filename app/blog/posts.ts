@@ -17,7 +17,9 @@ export type Block =
   // which diagram to render in the page; `description` is the AI-facing text.
   | { type: "diagram"; variant: string; caption?: string; description: string }
   // A small footer note (credits, acknowledgements) with an optional link.
-  | { type: "note"; text: string; href?: string; linkText?: string };
+  | { type: "note"; text: string; href?: string; linkText?: string }
+  // A term/description list (definition list) — wraps cleanly, no scrollbar.
+  | { type: "deflist"; items: { term: string; desc: string }[] };
 
 export type Post = {
   slug: string;
@@ -42,6 +44,7 @@ export const posts: Post[] = [
       "For a decade we optimized content to be found by search engines (SEO); the same shift is now happening for AI, and it is worth getting ahead of.",
       "If you do not describe your own work for machines, they will guess — scraping HTML, dropping context, ignoring images. You lose control of how you are represented.",
       "This blog publishes its own machine-readable layer at /blog/llms.txt: a self-authored description of every post, including text for every image.",
+      "The practical toolkit is four small files: robots.txt (crawl rules + sitemap pointer), sitemap.xml (every indexable page), JSON-LD/Schema.org (structured facts like identity and publish dates), and llms.txt (a plain-text summary written for LLMs). This site ships all four.",
       "Making content AI-readable is not surrendering it — it is the opposite. You decide what the machine sees and how you are summarized.",
     ],
     content: [
@@ -85,11 +88,48 @@ export const posts: Post[] = [
         type: "p",
         text: "That is why this blog publishes its own machine-readable layer at /blog/llms.txt — a clean, self-authored description of every post, written in my words, with a text description of each image. Any model or agent can read it and understand what I meant, instead of what a parser could salvage. Same source of truth as the page you are reading; I just made sure the machines get an honest copy too.",
       },
+      {
+        type: "h2",
+        text: "The plumbing that makes it work",
+      },
+      {
+        type: "p",
+        text: "None of this is magic — it is a handful of small, boring files that have quietly become the interface between your site and the machines reading it. Four worth knowing:",
+      },
+      {
+        type: "deflist",
+        items: [
+          {
+            term: "robots.txt",
+            desc: "who may crawl, and where the sitemap lives",
+          },
+          {
+            term: "sitemap.xml",
+            desc: "every page worth indexing, as one machine-readable list",
+          },
+          {
+            term: "JSON-LD",
+            desc: "structured facts (who you are, when a post was published) as Schema.org data",
+          },
+          {
+            term: "llms.txt",
+            desc: "a self-authored, plain-text summary written for LLMs",
+          },
+        ],
+      },
+      {
+        type: "p",
+        text: "The first three are SEO-era plumbing, repurposed. robots.txt and sitemap.xml have guided crawlers for twenty years. JSON-LD (Schema.org) is how a machine reads 'this is a Person, this is their job, these are their links' without parsing your markup at all. llms.txt is the new one — a convention for handing a model a clean summary instead of making it reverse-engineer your HTML.",
+      },
+      {
+        type: "p",
+        text: "This site ships all four. robots.txt points to the sitemap, the sitemap lists every page and post, each page carries JSON-LD, and there is an llms.txt at the root plus a detailed one for the blog. Put together, an agent can land here and get an honest, structured answer to 'who is this and what have they built' — no scraping, no guessing.",
+      },
     ],
   },
   {
     slug: "reverse-engineering-heycyan",
-    title: "How I reverse-engineered my smart glasses and built my own app to take back control of the input data",
+    title: "How I reverse-engineered my smart glasses and built my own app to take back control of the data",
     date: "2026-07-13",
     readingTime: "9 min",
     summary:
@@ -364,6 +404,8 @@ function blockToMarkdown(block: Block): string {
       return block.href
         ? `${block.text} [${block.linkText ?? "link"}](${block.href})`
         : block.text;
+    case "deflist":
+      return block.items.map((i) => `- **${i.term}** — ${i.desc}`).join("\n");
   }
 }
 
