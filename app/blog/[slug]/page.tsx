@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { getPost, postToMarkdown, posts, type Block } from "../posts";
 import ViewCounter from "./ViewCounter";
 import CopyForAI from "./CopyForAI";
+import SiteNav from "@/components/SiteNav";
 import { SITE_URL, SITE_NAME, AUTHOR } from "@/lib/site";
 
 export function generateStaticParams() {
@@ -320,42 +321,7 @@ export default async function Post({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(blogPostingLd) }}
       />
       {/* Nav */}
-      <header className="sticky top-0 z-50 bg-transparent">
-        <div className="max-w-3xl mx-auto px-6 py-4 flex justify-between items-center">
-          <Link
-            href="/blog"
-            className="text-xs uppercase tracking-widest hover:text-gray-400 transition-colors"
-          >
-            ← Blog
-          </Link>
-          <nav className="flex items-center gap-6 text-xs text-gray-500 uppercase tracking-widest">
-            <Link href="/blog" className="text-white transition-colors">
-              Blog
-            </Link>
-            <Link href="/#work" className="hover:text-white transition-colors">
-              Work
-            </Link>
-            <Link
-              href="/#experience"
-              className="hover:text-white transition-colors"
-            >
-              Exp
-            </Link>
-            <Link href="/lab" className="hover:text-white transition-colors">
-              Lab
-            </Link>
-            <Link href="/#now" className="hover:text-white transition-colors">
-              Now
-            </Link>
-            <Link
-              href="/#contact"
-              className="hover:text-white transition-colors"
-            >
-              Contact
-            </Link>
-          </nav>
-        </div>
-      </header>
+      <SiteNav active="Blog" />
 
       <main className="max-w-3xl mx-auto px-6">
         <article className="py-24 md:py-28">
