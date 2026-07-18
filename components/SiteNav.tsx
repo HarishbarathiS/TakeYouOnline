@@ -15,11 +15,17 @@ const NAV_LINKS = [
 type SiteNavProps = {
   /** Which nav item is the current page (highlighted, not hoverable). */
   active?: string;
-  /** "home" shows the HBS wordmark; "back" shows a ← link to home. */
+  /** "home" shows the HBS wordmark; "back" shows a ← link. */
   variant?: "home" | "back";
+  /** Where the "back" arrow links to. Defaults to home. */
+  backHref?: string;
 };
 
-export default function SiteNav({ active, variant = "back" }: SiteNavProps) {
+export default function SiteNav({
+  active,
+  variant = "back",
+  backHref = "/",
+}: SiteNavProps) {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const left =
@@ -27,8 +33,8 @@ export default function SiteNav({ active, variant = "back" }: SiteNavProps) {
       <span className="text-sm uppercase tracking-widest">HBS</span>
     ) : (
       <Link
-        href="/"
-        aria-label="Back to home"
+        href={backHref}
+        aria-label="Back"
         className="group flex items-center justify-center w-8 h-8 -ml-2 rounded-full text-gray-400 hover:text-white hover:bg-white/5 transition-colors"
       >
         <svg

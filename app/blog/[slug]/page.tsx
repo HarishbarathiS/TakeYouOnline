@@ -321,7 +321,7 @@ export default async function Post({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(blogPostingLd) }}
       />
       {/* Nav */}
-      <SiteNav active="Blog" />
+      <SiteNav active="Blog" backHref="/blog" />
 
       <main className="max-w-3xl mx-auto px-6">
         <article className="py-24 md:py-28">
